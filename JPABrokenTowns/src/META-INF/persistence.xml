@@ -7,7 +7,11 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<!-- Entities go here between the class tags -->
-		<!-- <class></class> -->
+		<class>entites.Case</class>
+		<class>entites.MessagePost</class>
+		<class>entites.User</class>
+		<class>entites.Municipality</class>
+		<class>entites.Photo</class>
 		
 
 
