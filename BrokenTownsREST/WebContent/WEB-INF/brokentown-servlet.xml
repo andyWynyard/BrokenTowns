@@ -25,6 +25,10 @@
 		<property name="entityManagerFactory" ref="myEntityManagerFactory" />
 	</bean>
 	
+	<!-- encryptor bean -->
+	<bean id="bCryptPasswordEncoder"
+    class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
 	<!-- previous servlet content -->
 	<!-- Do not need this yet -->
 	<!-- <mvc:interceptors>
