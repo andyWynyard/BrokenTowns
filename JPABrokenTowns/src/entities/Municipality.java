@@ -14,23 +14,34 @@ public class Municipality {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	 
+	private String worksEmail;
 	
-	//note, this doesn't have to be a map, but if the API is going to be pulling up 
-	//a list of people to contact, maybe we need to do a key value pair for if the 
-	//works contact has a phone number, an email, etc. 
-	@Column(name="works_contact")
-	private Map<Integer, String> worksContact;
+	private String worksPhoneNumber;
 
 	private String name;
 	
 	private String state;
 
-	public Map<Integer, String> getWorksContact() {
-		return worksContact;
+	
+	public String getWorksEmail() {
+		return worksEmail;
 	}
 
-	public void setWorksContact(Map<Integer, String> worksContact) {
-		this.worksContact = worksContact;
+	public void setWorksEmail(String worksEmail) {
+		this.worksEmail = worksEmail;
+	}
+
+	public String getWorksPhoneNumber() {
+		return worksPhoneNumber;
+	}
+
+	public void setWorksPhoneNumber(String worksPhoneNumber) {
+		this.worksPhoneNumber = worksPhoneNumber;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
