@@ -25,6 +25,21 @@
 		<property name="entityManagerFactory" ref="myEntityManagerFactory" />
 	</bean>
 	
+	<!-- previous servlet content -->
+	<!-- Do not need this yet -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/*/todo/**" />
+			<bean id="DataSecurityInterceptor" class="security.DataSecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+
+	<!-- additional servlet content -->
+	
+	
+	
+	
+	
 	<!-- beans go below, change the id and the class -->
 	<!-- <bean id="petsdao1" class="data.PetDAOImpl"/> -->
 	
