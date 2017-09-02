@@ -3,6 +3,7 @@ package entities;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class CaseItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonBackReference
 	private User user;
@@ -36,7 +37,7 @@ public class CaseItem {
 
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "municipality_id")
 	@JsonManagedReference
 	private List<Municipality> municipalities;
@@ -54,13 +55,13 @@ public class CaseItem {
 	@Max(5)
 	private int severity;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "photo_url")
 	private Photo photo;
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<MessagePost> messagePosts;
 

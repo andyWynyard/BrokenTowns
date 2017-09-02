@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class PlaceHolder {
+public class EntityTests {
 
 	@Test
 	public void test() {

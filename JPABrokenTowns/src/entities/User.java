@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.criteria.CriteriaBuilder.Case;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,11 +30,11 @@ public class User {
 
 	private String password;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<CaseItem> caseItems;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Photo photo;
 	
 

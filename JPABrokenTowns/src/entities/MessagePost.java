@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class MessagePost {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(mappedBy = "messagePosts")
+	@OneToMany(mappedBy = "messagePosts", cascade = CascadeType.ALL)
 	@JoinColumn(name = "case_item_id")
 	private CaseItem caseItem;
 
