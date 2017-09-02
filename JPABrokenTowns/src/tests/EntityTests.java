@@ -1,8 +1,7 @@
 package tests;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -104,5 +103,66 @@ public class EntityTests {
 		assertEquals(1, caseId);
 	}
 	
-	//Case Entity Tests
+	//CaseItem Entity Tests
+	@Test
+	public void test_case_item_for_description() {
+		assertNotEquals("mailbox", caseItem.getDescription());
+		assertEquals("things be broke", caseItem.getDescription());
+	}
+	
+	@Test
+	public void test_case_item_for_user_last_name() {
+		assertNotEquals("kangaroo", caseItem.getUser().getLastName());
+		assertEquals("Dude", caseItem.getUser().getLastName());
+	}
+	
+	@Test
+	public void test_case_item_for_photo() {
+		assertNotEquals("pretty", caseItem.getPhoto().getUrl());
+		assertEquals("apicture@picture.com", caseItem.getPhoto().getUrl());
+	}
+	
+	@Test
+	public void test_case_item_for_municipality() {
+		assertNotEquals("middle of nowhere", caseItem.getMunicipality().getName());
+		assertEquals("some city", caseItem.getMunicipality().getName());
+	}
+	
+	@Test
+	public void test_case_item_for_message_user_id() {
+		assertNotEquals(872, caseItem.getMessagePosts().get(0).getUser().getId());
+		assertEquals(1, caseItem.getMessagePosts().get(0).getUser().getId());
+	}
+	
+	//Municipality Entity Tests
+	@Test
+	public void test_municipality_for_state() {
+		assertNotEquals("La La Land", municipality.getState());
+		assertEquals("some state", municipality.getState());
+	}
+	
+	@Test
+	public void test_municipality_for_latitude() {
+		assertNotEquals(9999, municipality.getCaseItems().get(0).getLatitude());
+		assertEquals(5678, municipality.getCaseItems().get(0).getLatitude());
+	}
+	
+	//Photo Entity Tests
+	@Test
+	public void test_photo_for_url() {
+		assertNotEquals("piggy bank", photo.getUrl());
+		assertEquals("apicture@picture.com", photo.getUrl());
+	}
+	
+	@Test
+	public void test_photo_for_case_item_longitude() {
+		assertNotEquals(666, photo.getCaseItem().getLongitude());
+		assertEquals(1234, photo.getCaseItem().getLongitude());
+	}
+	
+	@Test
+	public void test_photo_for_user_email() {
+		assertNotEquals("paint", photo.getUser().getEmail());
+		assertEquals(null, photo.getUser().getEmail());
+	}
 }
