@@ -81,4 +81,28 @@ public class EntityTests {
 		assertNotEquals("chicken", title);
 		assertEquals("stuff", title);
 	}
+	
+	//Message Entity Tests
+	@Test
+	public void test_message_for_id() {
+		int id = messagePost.getId();
+		assertNotEquals(17, id);
+		assertEquals(1, id);
+	}
+	
+	@Test
+	public void test_message_for_user() {
+		int userId = messagePost.getUser().getId();
+		assertNotEquals(67, userId);
+		assertEquals(1, userId);
+	}
+	
+	@Test
+	public void test_message_for_case_id() {
+		int caseId = messagePost.getCaseItem().getId();
+		assertNotEquals(43, caseId);
+		assertEquals(1, caseId);
+	}
+	
+	//Case Entity Tests
 }
