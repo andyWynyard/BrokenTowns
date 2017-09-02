@@ -1,7 +1,9 @@
 package entities;
 
+import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -17,15 +20,17 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-public class Case {
+@Table(name = "case_item")
+public class CaseItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToOne
-	@JoinColumn(name="photo_url")
-	private Photo photo;
+	@OneToMany
+	@JoinColumn(name = "user_id")
+	@JsonBackReference
+	private User user;
 
 	private String title;
 
@@ -36,27 +41,28 @@ public class Case {
 	@JsonManagedReference
 	private List<Municipality> municipalities;
 
-	@OneToMany
-	@JoinColumn(name = "user_id")
-	@JsonBackReference
-	private User user;
+	private int longitude;
+
+	private int latitude;
+
+	private boolean done;
+
+	@Column(name = "complete_date")
+	private Timestamp completeDate;
+
+	@Min(1)
+	@Max(5)
+	private int severity;
+
+	@OneToOne
+	@JoinColumn(name = "photo_url")
+	private Photo photo;
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
 	@ManyToOne
 	@JsonManagedReference
 	private List<MessagePost> messagePosts;
-
-	private int longitude;
-
-	private int latitude;
-
-	@Min(1)
-	@Max(5)
-	private int severity;
-
-	private boolean done;
-	
 
 	public Photo getPhoto() {
 		return photo;

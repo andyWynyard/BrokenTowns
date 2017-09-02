@@ -19,18 +19,17 @@ public class MessagePost {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@OneToMany(mappedBy = "messagePosts")
+	@JoinColumn(name = "case_item_id")
+	private CaseItem caseItem;
+
+	@Column(name = "user_id")
+	private User user;
+
 	private String text;
-	
+
+	@Column(name = "create_date")
 	private Timestamp createDate;
-	
-	@Column(name="user_id")
-	private int userId;
-	
-	//For some reason, 'case' is an invalid variable declarator, so therfore I named it 
-	//'aCase' as opposed to 'case'
-	@OneToMany(mappedBy="messagePosts")
-	@JoinColumn(name="case_id")
-	private Case aCase;
 
 	public String getText() {
 		return text;
@@ -48,25 +47,28 @@ public class MessagePost {
 		this.createDate = createDate;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Case getaCase() {
-		return aCase;
+	public void setCaseItem(CaseItem caseItem) {
+		this.caseItem = caseItem;
 	}
 
-	public void setaCase(Case aCase) {
-		this.aCase = aCase;
+	public CaseItem getCaseItem() {
+		return caseItem;
+	}
+
+	public void setaCase(CaseItem aCase) {
+		this.caseItem = aCase;
 	}
 
 	public int getId() {
 		return id;
 	}
-	
 
 }

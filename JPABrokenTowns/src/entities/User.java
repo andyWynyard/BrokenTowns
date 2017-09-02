@@ -32,10 +32,11 @@ public class User {
 
 	@ManyToOne
 	@JsonManagedReference
-	private List<Case> cases;
+	private List<CaseItem> caseItems;
 
 	@OneToOne
 	private Photo photo;
+	
 
 	public Photo getPhoto() {
 		return photo;
@@ -77,12 +78,12 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Case> getCases() {
-		return cases;
+	public List<CaseItem> getCaseItems() {
+		return caseItems;
 	}
 
-	public void setCases(List<Case> cases) {
-		this.cases = cases;
+	public void setCases(List<CaseItem> caseItems) {
+		this.caseItems = caseItems;
 	}
 
 	public int getId() {

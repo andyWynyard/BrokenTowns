@@ -15,8 +15,8 @@ public class Photo {
 	private String url;
 
 	@OneToOne
-	@JoinColumn(name = "case_id")
-	private Case aCase;
+	@JoinColumn(name = "case_item_id")
+	private CaseItem caseItem;
 
 	private String s3Key;
 
@@ -32,12 +32,12 @@ public class Photo {
 		this.url = url;
 	}
 
-	public Case getaCase() {
-		return aCase;
+	public CaseItem getCaseItem() {
+		return caseItem;
 	}
 
-	public void setaCase(Case aCase) {
-		this.aCase = aCase;
+	public void setaCase(CaseItem caseItem) {
+		this.caseItem= caseItem;
 	}
 
 	public String getS3Key() {

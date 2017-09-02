@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,38 +8,34 @@ import javax.persistence.Id;
 
 @Entity
 public class Municipality {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	 
-	private String worksEmail;
-	
-	private String worksPhoneNumber;
 
 	private String name;
-	
+
 	private String state;
 
-	
-	public String getWorksEmail() {
-		return worksEmail;
+	@Column(name = "is_correct")
+	private Boolean isCorrect;
+
+	private String answer;
+
+	public Boolean getIsCorrect() {
+		return isCorrect;
 	}
 
-	public void setWorksEmail(String worksEmail) {
-		this.worksEmail = worksEmail;
+	public void setIsCorrect(Boolean isCorrect) {
+		this.isCorrect = isCorrect;
 	}
 
-	public String getWorksPhoneNumber() {
-		return worksPhoneNumber;
+	public String getAnswer() {
+		return answer;
 	}
 
-	public void setWorksPhoneNumber(String worksPhoneNumber) {
-		this.worksPhoneNumber = worksPhoneNumber;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	public String getName() {
@@ -60,6 +57,5 @@ public class Municipality {
 	public int getId() {
 		return id;
 	}
-	
-	
+
 }
