@@ -29,14 +29,14 @@ public class User {
 
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<CaseItem> caseItems;
 
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Photo> photos;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<MessagePost> messages;
 
@@ -88,12 +88,16 @@ public class User {
 		return caseItems;
 	}
 
-	public void setCases(List<CaseItem> caseItems) {
-		this.caseItems = caseItems;
-	}
-
 	public int getId() {
 		return id;
+	}
+
+	public List<MessagePost> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<MessagePost> messages) {
+		this.messages = messages;
 	}
 
 }

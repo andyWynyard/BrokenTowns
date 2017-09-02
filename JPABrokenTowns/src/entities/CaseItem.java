@@ -55,7 +55,7 @@ public class CaseItem {
 	@Max(5)
 	private int severity;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="caseItem", cascade = CascadeType.ALL)
 	@JoinColumn(name = "photo_url")
 	private Photo photo;
 
@@ -65,12 +65,12 @@ public class CaseItem {
 	@JsonManagedReference
 	private List<MessagePost> messagePosts;
 
-	public Photo getPhoto() {
-		return photo;
+	public User getUser() {
+		return user;
 	}
 
-	public void setPhoto(Photo photo) {
-		this.photo = photo;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getTitle() {
@@ -97,30 +97,6 @@ public class CaseItem {
 		this.municipality = municipality;
 	}
 
-	public Timestamp getCompleteDate() {
-		return completeDate;
-	}
-
-	public void setCompleteDate(Timestamp completeDate) {
-		this.completeDate = completeDate;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<MessagePost> getMessagePosts() {
-		return messagePosts;
-	}
-
-	public void setMessagePosts(List<MessagePost> messagePosts) {
-		this.messagePosts = messagePosts;
-	}
-
 	public int getLongitude() {
 		return longitude;
 	}
@@ -137,6 +113,22 @@ public class CaseItem {
 		this.latitude = latitude;
 	}
 
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	public Timestamp getCompleteDate() {
+		return completeDate;
+	}
+
+	public void setCompleteDate(Timestamp completeDate) {
+		this.completeDate = completeDate;
+	}
+
 	public int getSeverity() {
 		return severity;
 	}
@@ -145,12 +137,20 @@ public class CaseItem {
 		this.severity = severity;
 	}
 
-	public boolean isDone() {
-		return done;
+	public Photo getPhoto() {
+		return photo;
 	}
 
-	public void setDone(boolean done) {
-		this.done = done;
+	public void setPhoto(Photo photo) {
+		this.photo = photo;
+	}
+
+	public List<MessagePost> getMessagePosts() {
+		return messagePosts;
+	}
+
+	public void setMessagePosts(List<MessagePost> messagePosts) {
+		this.messagePosts = messagePosts;
 	}
 
 	public int getId() {

@@ -18,7 +18,7 @@ public class Photo {
 
 	private String url;
 
-	@OneToOne(mappedBy="photo", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "case_item_id")
 	private CaseItem caseItem;
 

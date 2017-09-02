@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -51,11 +53,32 @@ public class EntityTests {
 		caseItem = null;
 	}
 
+	//User Entity Tests
 	@Test
 	public void test_for_user_first_name() {
-		String firstName = user.getFirstName();
-		assertEquals("chicken", firstName);
+		assertNotEquals("chicken", user.getFirstName());
+		assertEquals("Some", user.getFirstName());
 		
 	}
-
+	
+	@Test
+	public void test_user_for_a_message() {
+		String text = user.getMessages().get(0).getText();
+		assertNotEquals("chicken", text);
+		assertEquals("stuff's broken", text);
+	}
+	
+	@Test
+	public void test_user_for_photo() {
+		String superSecretKey = user.getPhotos().get(0).getS3Key();
+		assertNotEquals("chicken", superSecretKey);
+		assertEquals("secret key", superSecretKey);
+	}
+	
+	@Test
+	public void test_user_for_case_item() {
+		String title = user.getCaseItems().get(0).getTitle();
+		assertNotEquals("chicken", title);
+		assertEquals("stuff", title);
+	}
 }
