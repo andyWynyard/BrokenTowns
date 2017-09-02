@@ -8,8 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -30,20 +29,27 @@ public class User {
 
 	private String password;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<CaseItem> caseItems;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private Photo photo;
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Photo> photos;
 	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<MessagePost> messages;
 
-	public Photo getPhoto() {
-		return photo;
+	public List<Photo> getPhotos() {
+		return photos;
 	}
 
-	public void setPhoto(Photo photo) {
-		this.photo = photo;
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+
+	public void setCaseItems(List<CaseItem> caseItems) {
+		this.caseItems = caseItems;
 	}
 
 	public String getEmail() {

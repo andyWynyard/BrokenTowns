@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "message")
@@ -20,11 +22,13 @@ public class MessagePost {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(mappedBy = "messagePosts", cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "case_item_id")
 	private CaseItem caseItem;
 
-	@Column(name = "user_id")
+	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonBackReference
 	private User user;
 
 	private String text;

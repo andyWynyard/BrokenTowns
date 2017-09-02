@@ -1,12 +1,15 @@
 package entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Photo {
 
 	@Id
@@ -15,13 +18,13 @@ public class Photo {
 
 	private String url;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="photo", cascade = CascadeType.ALL)
 	@JoinColumn(name = "case_item_id")
 	private CaseItem caseItem;
 
 	private String s3Key;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
 

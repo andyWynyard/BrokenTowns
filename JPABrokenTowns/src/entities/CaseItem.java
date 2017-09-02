@@ -28,7 +28,7 @@ public class CaseItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonBackReference
 	private User user;
@@ -40,7 +40,7 @@ public class CaseItem {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "municipality_id")
 	@JsonManagedReference
-	private List<Municipality> municipalities;
+	private Municipality municipality;
 
 	private int longitude;
 
@@ -61,7 +61,7 @@ public class CaseItem {
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "caseItem", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<MessagePost> messagePosts;
 
@@ -89,12 +89,20 @@ public class CaseItem {
 		this.description = description;
 	}
 
-	public List<Municipality> getMunicipalities() {
-		return municipalities;
+	public Municipality getMunicipality() {
+		return municipality;
 	}
 
-	public void setMunicipalities(List<Municipality> municipalities) {
-		this.municipalities = municipalities;
+	public void setMunicipality(Municipality municipality) {
+		this.municipality = municipality;
+	}
+
+	public Timestamp getCompleteDate() {
+		return completeDate;
+	}
+
+	public void setCompleteDate(Timestamp completeDate) {
+		this.completeDate = completeDate;
 	}
 
 	public User getUser() {

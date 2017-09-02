@@ -1,12 +1,16 @@
 package entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Municipality {
@@ -24,15 +28,16 @@ public class Municipality {
 
 	private String answer;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	private CaseItem caseItem;
+	@OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<CaseItem> caseItems;
 
-	public CaseItem getCaseItem() {
-		return caseItem;
+	public List<CaseItem> getCaseItems() {
+		return caseItems;
 	}
 
-	public void setCaseItem(CaseItem caseItem) {
-		this.caseItem = caseItem;
+	public void setCaseItems(List<CaseItem> caseItems) {
+		this.caseItems = caseItems;
 	}
 
 	public Boolean getIsCorrect() {
