@@ -1,0 +1,70 @@
+CREATE DATABASE brokentown;
+
+USE brokentown;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `municipality` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `is_correct` tinyint(1) NOT NULL,
+  `answer` varchar(100) NOT NULL,
+  PRIMARY KEY(`id`)
+);
+
+CREATE TABLE `case_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `municipality_id` int(11) NOT NULL,
+  `longitude` varchar(50) NOT NULL,
+  `latitude` varchar(50) NOT NULL,
+  `done` tinyint(1) NOT NULL DEFAULT '0',
+  `complete_date` varchar(50),
+  `severity` int(1) NOT NULL DEFAULT '0',
+  `photo_url` varchar(255),
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`municipality_id`)
+    REFERENCES `municipality` (`id`),
+  FOREIGN KEY(`user_id`)
+    REFERENCES `user` (`id`)
+);
+
+CREATE TABLE `photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `case_item_id` int(11) NOT NULL,
+  `s3key` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`case_item_id`)
+    REFERENCES `case_item` (`id`),
+  FOREIGN KEY(`user_id`)
+    REFERENCES `user` (`id`)
+);
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `case_item_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `text` varchar(255) NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY(`id`),
+  FOREIGN KEY(`case_item_id`)
+    REFERENCES `case_item` (`id`),
+  FOREIGN KEY(`user_id`)
+    REFERENCES `user` (`id`)
+);
+
+
+
+CREATE user 'student'@'localhost' IDENTIFIED BY 'student';
+GRANT ALL PRIVILEGES ON brokentown.* TO 'student'@'localhost';
