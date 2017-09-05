@@ -23,15 +23,16 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Set<User> index() {
-		String query = "SELECT * FROM user";
-		List<User> tempList = em.createNativeQuery(query).getResultList();
+		String query = "SELECT u FROM User u";
+		List<User> tempList = em.createQuery(query, User.class).getResultList();
 		Set<User> users = new HashSet<>(tempList);
 		return users;
 	}
 
 	@Override
 	public User show(int id) {
-		return em.find(User.class, id);
+		String query = "SELECT u FROM User u WHERE u.id = :id";
+		return em.createQuery(query, User.class).setParameter("id", id).getResultList().get(0);
 	}
 
 	@Override

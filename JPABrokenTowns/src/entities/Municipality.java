@@ -29,6 +29,8 @@ public class Municipality {
 	private Boolean isCorrect;
 
 	private String answer;
+	
+	private String email;
 
 	@OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
 	@JsonBackReference
@@ -78,4 +80,12 @@ public class Municipality {
 		return id;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 }
