@@ -21,7 +21,7 @@ public class UserController {
 	@Autowired
 	private UserDAO dao;
 	
-	@RequestMapping(path = "ping", method = RequestMethod.GET)
+	@RequestMapping(path = "/users/ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
@@ -37,8 +37,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "/users", method = RequestMethod.POST)
-	public User creatre(HttpServletRequest req, HttpServletResponse res, @RequestBody String userJson) {
+	public User create(HttpServletRequest req, HttpServletResponse res, @RequestBody String userJson) {
 		return dao.create(userJson);
+	}
+	
+	@RequestMapping(path="/users/{id}", method = RequestMethod.PUT) 
+	public User update(HttpServletRequest req, HttpServletResponse res, @RequestBody String userJson, @PathVariable int id) {
+		return dao.update(id, userJson);
+	
+	}
+	
+	@RequestMapping(path="/users/{id}", method = RequestMethod.DELETE)
+	public Boolean delete(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		return dao.destroy(id);
 	}
 	
 }
