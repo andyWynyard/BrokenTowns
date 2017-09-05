@@ -23,7 +23,7 @@ public class PhotoDAOImpl implements PhotoDAO {
 	
 
 	@Override
-	public Set<Photo> index(int id) {
+	public Set<Photo> index() {
 		String query = "SELECT p FROM Photo p";
 		List<Photo> listPhoto = em.createQuery(query, Photo.class).getResultList();
 		Set<Photo> setPhoto = new HashSet(listPhoto);

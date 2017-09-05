@@ -6,7 +6,7 @@ import entities.Photo;
 
 public interface PhotoDAO {
 	
-	public Set<Photo> index(int id);
+	public Set<Photo> index();
 	public Photo show(int id);
 	public Photo create(String photoJson);
 	public Photo update(int id, String photoJson);
