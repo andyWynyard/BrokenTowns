@@ -16,9 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "case_item")
@@ -30,7 +28,7 @@ public class CaseItem {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
+	@JsonIgnore
 	private User user;
 
 	private String title;
@@ -39,7 +37,7 @@ public class CaseItem {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "municipality_id")
-	@JsonManagedReference
+	@JsonIgnore
 	private Municipality municipality;
 
 	private int longitude;
