@@ -1,6 +1,5 @@
 package entities;
 
-import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "message")
@@ -34,7 +34,7 @@ public class MessagePost {
 	private String text;
 
 	@Column(name = "create_date")
-	private Timestamp createDate;
+	private String createDate;
 
 	public String getText() {
 		return text;
@@ -44,11 +44,11 @@ public class MessagePost {
 		this.text = text;
 	}
 
-	public Timestamp getCreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 

@@ -39,7 +39,7 @@ public class CaseItem {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "municipality_id")
-	@JsonManagedReference
+	@JsonBackReference(value = "caseToMunicipality")
 	private Municipality municipality;
 
 	private int longitude;
