@@ -68,10 +68,6 @@ public class MessagePost {
 		return caseItem;
 	}
 
-	public void setaCase(CaseItem aCase) {
-		this.caseItem = aCase;
-	}
-
 	public int getId() {
 		return id;
 	}
