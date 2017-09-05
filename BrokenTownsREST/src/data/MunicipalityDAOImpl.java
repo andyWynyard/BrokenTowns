@@ -60,10 +60,7 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 			updated = mapper.readValue(municipalityJson, Municipality.class);
 			managed.setName(updated.getName());
 			managed.setState(updated.getState());
-			managed.setIsCorrect(updated.getIsCorrect());
-			managed.setAnswer(updated.getAnswer());
-
-			return updated;
+			return managed;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

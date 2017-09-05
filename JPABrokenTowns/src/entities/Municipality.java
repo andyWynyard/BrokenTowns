@@ -25,11 +25,6 @@ public class Municipality {
 
 	private String state;
 
-	@Column(name = "is_correct")
-	private Boolean isCorrect;
-
-	private String answer;
-	
 	private String email;
 
 	@OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
@@ -42,22 +37,6 @@ public class Municipality {
 
 	public void setCaseItems(List<CaseItem> caseItems) {
 		this.caseItems = caseItems;
-	}
-
-	public Boolean getIsCorrect() {
-		return isCorrect;
-	}
-
-	public void setIsCorrect(Boolean isCorrect) {
-		this.isCorrect = isCorrect;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
 	}
 
 	public String getName() {
