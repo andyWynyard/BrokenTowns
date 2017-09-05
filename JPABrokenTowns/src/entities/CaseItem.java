@@ -1,6 +1,5 @@
 package entities;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -50,7 +49,7 @@ public class CaseItem {
 	private boolean done;
 
 	@Column(name = "complete_date")
-	private Timestamp completeDate;
+	private String completeDate;
 
 	@Min(1)
 	@Max(5)
@@ -122,11 +121,11 @@ public class CaseItem {
 		this.done = done;
 	}
 
-	public Timestamp getCompleteDate() {
+	public String getCompleteDate() {
 		return completeDate;
 	}
 
-	public void setCompleteDate(Timestamp completeDate) {
+	public void setCompleteDate(String completeDate) {
 		this.completeDate = completeDate;
 	}
 

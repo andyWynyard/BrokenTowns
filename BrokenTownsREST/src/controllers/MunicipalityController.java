@@ -21,33 +21,33 @@ public class MunicipalityController {
 	@Autowired
 	private MunicipalityDAO dao;
 	
-	@RequestMapping(path = "/municipalities/ping", method = RequestMethod.GET)
+	@RequestMapping(path = "municipalities/ping", method = RequestMethod.GET)
 	public String ping() {
 		return "municipality pong";
 	}
 	
-	@RequestMapping(path = "/municipalities", method = RequestMethod.GET)
+	@RequestMapping(path = "municipalities", method = RequestMethod.GET)
 	public Set<Municipality> index(HttpServletRequest req, HttpServletResponse res) {
 		return dao.index();
 	}
 	
-	@RequestMapping(path = "/municipalities/{id}", method = RequestMethod.GET) 
+	@RequestMapping(path = "municipalities/{id}", method = RequestMethod.GET) 
 	public Municipality show(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
 		return dao.show(id);
 	}
 	
-	@RequestMapping(path = "/municipalities", method = RequestMethod.POST)
+	@RequestMapping(path = "municipalities", method = RequestMethod.POST)
 	public Municipality create(HttpServletRequest req, HttpServletResponse res, @RequestBody String municipalityJson) {
 		return dao.create(municipalityJson);
 	}
 	
-	@RequestMapping(path="/municipalities/{id}", method = RequestMethod.PUT) 
+	@RequestMapping(path="municipalities/{id}", method = RequestMethod.PUT) 
 	public Municipality update(HttpServletRequest req, HttpServletResponse res, @RequestBody String municipalityJson, @PathVariable int id) {
 		return dao.update(id, municipalityJson);
 	
 	}
 	
-	@RequestMapping(path="/municipalities/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(path="municipalities/{id}", method = RequestMethod.DELETE)
 	public Boolean delete(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
 		return dao.destroy(id);
 	}

@@ -23,8 +23,9 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 
 	@Override
 	public Set<Municipality> index() {
-		String query = "SELECT * FROM municipality";
-		List<Municipality> tempList = em.createNativeQuery(query).getResultList();
+		String query = "SELECT m FROM Municipality m";
+		
+		List<Municipality> tempList = em.createQuery(query, Municipality.class).getResultList();
 		Set<Municipality> municipalities = new HashSet<>(tempList);
 		return municipalities;
 	}
@@ -63,12 +64,12 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 			managed.setIsCorrect(updated.getIsCorrect());
 			managed.setAnswer(updated.getAnswer());
 
-			return updated;
+			return managed;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 
-		return null;
 	}
 
 	@Override
