@@ -48,6 +48,8 @@
 	<bean id="petsdao1" class="data.UserDAOImpl"/> 
 	<bean id="petsdao2" class="data.MessagePostDAOImpl"/> 
 	<bean id="petsdao3" class="data.PhotoDAOImpl"/> 
+	<bean id="petsdao4" class="data.CaseDAOImpl"/> 
+	<bean id="petsdao5" class="data.MunicipalityDAOImpl"/> 
 	
 
 	<tx:annotation-driven transaction-manager="myTransactionManager" />
