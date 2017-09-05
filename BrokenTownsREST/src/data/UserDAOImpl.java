@@ -58,17 +58,16 @@ public class UserDAOImpl implements UserDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			updated = mapper.readValue(userJson, User.class);
-			managed.setFirstName(managed.getFirstName());
-			managed.setLastName(managed.getLastName());
-			managed.setPassword(managed.getPassword());
-			managed.setEmail(managed.getEmail());
+			managed.setFirstName(updated.getFirstName());
+			managed.setLastName(updated.getLastName());
+			managed.setPassword(updated.getPassword());
+			managed.setEmail(updated.getEmail());
 
-			return updated;
+			return managed;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-
-		return null;
 	}
 
 	@Override
