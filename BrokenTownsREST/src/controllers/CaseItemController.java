@@ -18,7 +18,7 @@ public class CaseItemController {
 	@Autowired
 	private CaseDAO dao;
 	
-	@RequestMapping(path = "ping", method = RequestMethod.GET)
+	@RequestMapping(path = "caseItems/ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
