@@ -7,12 +7,16 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.CaseItem;
+import entities.CaseItemDTO;
+import entities.Municipality;
+import entities.User;
 
 @Transactional
 @Repository
@@ -37,16 +41,18 @@ public class CaseDAOImpl implements CaseDAO {
 
 	@Override
 	public CaseItem create(String jsonCaseItem) {
-		CaseItem cm = null;
+		CaseItem ci = null;
+		CaseItemDTO dto = null;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			cm = mapper.readValue(jsonCaseItem, CaseItem.class);
-			em.persist(cm);
+			dto = mapper.readValue(jsonCaseItem, CaseItemDTO.class);
+			ci = generateCaseItem(dto);
+			em.persist(ci);
 			em.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return cm;
+		return ci;
 	}
 
 	@Override
@@ -87,4 +93,23 @@ public class CaseDAOImpl implements CaseDAO {
 		}
 	}
 
+	private CaseItem generateCaseItem(CaseItemDTO dto) {
+		CaseItem ci = new CaseItem();
+		ci.setCompleteDate(dto.getCompleteDate());
+		ci.setDescription(dto.getDescription());
+		ci.setDone(dto.isDone());
+		ci.setLatitude(dto.getLatitude());
+		ci.setLongitude(dto.getLongitude());
+		ci.setMunicipality(em.find(Municipality.class, dto.getMunicipalityId()));
+		ci.setPhoto(dto.getPhoto());
+		ci.setSeverity(dto.getSeverity());
+		ci.setTitle(dto.getTitle());
+		ci.setUser(em.find(User.class, dto.getUserId()));
+		ci.setMessagePosts(null);
+		
+//		ci.setUser(userDao.show(dto.getUserId()));
+//		ci.setMunicipality(municDao.show(dto.getMunicipalityId()));
+//		ci.setPhoto(photo);
+		return ci;
+	}
 }

@@ -28,7 +28,7 @@ public class CaseItem {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
+	@JsonIgnore
 	private User user;
 
 	private String title;
