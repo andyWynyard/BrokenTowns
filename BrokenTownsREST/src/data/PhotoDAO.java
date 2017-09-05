@@ -8,9 +8,9 @@ public interface PhotoDAO {
 	
 	public Set<Photo> index(int id);
 	public Photo show(int id);
-	public Photo create(int uid, String photoJson);
-	public Photo update(int uid, int pid, String photoJson);
-	public Photo destroy(int uid, int pid);
+	public Photo create(String photoJson);
+	public Photo update(int id, String photoJson);
+	public boolean destroy(int id);
 	
 	
 

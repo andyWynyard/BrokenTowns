@@ -37,29 +37,51 @@ public class PhotoDAOImpl implements PhotoDAO {
 	}
 
 	@Override
-	public Photo create(int uid, String photoJson) {
+	public Photo create(String photoJson) {
 		ObjectMapper om = new ObjectMapper();
 		Photo p = null;
 		try {
 			p = om.readValue(photoJson, Photo.class);
-			
-			
+			em.persist(p);
+			em.flush();
+			return p;
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 
 	@Override
-	public Photo update(int uid, int pid, String photoJson) {
-		// TODO Auto-generated method stub
-		return null;
+	public Photo update(int id, String photoJson) {
+		Photo managed = em.find(Photo.class, id);
+		Photo newPhoto = null;
+		ObjectMapper om = new ObjectMapper();
+		try {
+			newPhoto = om.readValue(photoJson, Photo.class);
+			managed.setS3Key(newPhoto.getS3Key());
+			managed.setUrl(newPhoto.getUrl());
+			managed.setUser(newPhoto.getUser());
+			managed.setaCase(newPhoto.getCaseItem());
+			return managed;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	@Override
-	public Photo destroy(int uid, int pid) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean destroy(int id) {
+		boolean removed;
+		try {
+			Photo p = em.find(Photo.class, id);
+			em.remove(p);
+			removed = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			removed = false;
+		}
+		return removed;
 	}
 
 }
