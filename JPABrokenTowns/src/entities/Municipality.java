@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="municipality")
@@ -31,7 +31,7 @@ public class Municipality {
 	private String answer;
 
 	@OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
-	@JsonBackReference
+	@JsonIgnore
 	private List<CaseItem> caseItems;
 
 	public List<CaseItem> getCaseItems() {

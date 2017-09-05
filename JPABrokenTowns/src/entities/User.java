@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user")
@@ -32,14 +32,14 @@ public class User {
 	private String password;
 
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<CaseItem> caseItems;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Photo> photos;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<MessagePost> messages;
 
 	public List<Photo> getPhotos() {

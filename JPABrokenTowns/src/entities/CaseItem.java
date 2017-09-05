@@ -18,6 +18,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -62,7 +63,7 @@ public class CaseItem {
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
 	@OneToMany(mappedBy = "caseItem", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonIgnore
 	private List<MessagePost> messagePosts;
 
 	public User getUser() {
