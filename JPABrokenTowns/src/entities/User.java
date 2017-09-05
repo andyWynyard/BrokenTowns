@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,15 +30,15 @@ public class User {
 
 	private String password;
 
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<CaseItem> caseItems;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Photo> photos;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<MessagePost> messages;
 

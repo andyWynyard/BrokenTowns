@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +25,7 @@ public class Municipality {
 
 	private String email;
 
-	@OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "municipality")
 	@JsonManagedReference(value = "caseToMunicipality")
 	private List<CaseItem> caseItems;
 

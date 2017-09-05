@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,6 @@ import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "case_item")
@@ -28,7 +26,7 @@ public class CaseItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@JsonBackReference
 	private User user;
@@ -37,7 +35,7 @@ public class CaseItem {
 
 	private String description;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "municipality_id")
 	@JsonBackReference(value = "caseToMunicipality")
 	private Municipality municipality;
@@ -55,13 +53,13 @@ public class CaseItem {
 	@Max(5)
 	private int severity;
 
-	@OneToOne(mappedBy="caseItem", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="caseItem")
 	@JoinColumn(name = "photo_url")
 	private Photo photo;
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
-	@OneToMany(mappedBy = "caseItem", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "caseItem")
 	@JsonIgnore
 	private List<MessagePost> messagePosts;
 
