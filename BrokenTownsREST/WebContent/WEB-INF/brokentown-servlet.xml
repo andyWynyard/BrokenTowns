@@ -45,7 +45,9 @@
 	
 	
 	<!-- beans go below, change the id and the class -->
-	<!-- <bean id="petsdao1" class="data.PetDAOImpl"/> -->
+	<bean id="petsdao1" class="data.UserDAOImpl"/> 
+	<bean id="petsdao2" class="data.MessagePostDAOImpl"/> 
+	<bean id="petsdao2" class="data.PhotoDAOImpl"/> 
 	
 
 	<tx:annotation-driven transaction-manager="myTransactionManager" />
