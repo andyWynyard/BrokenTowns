@@ -18,34 +18,34 @@ public class MessageController {
 	@Autowired
 	MessagePostDAO dao;
 	
-	@RequestMapping(path = "messages/ping", method = RequestMethod.GET)
+	@RequestMapping(path = "caseItems/{caseId}/messages/ping", method = RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
 	
-	@RequestMapping(path = "messages", method = RequestMethod.GET)
-	public Set<MessagePost> index() {
-		return dao.index();
+	@RequestMapping(path = "caseItems/{caseId}/messages", method = RequestMethod.GET)
+	public Set<MessagePost> index(@PathVariable int caseId) {
+		return dao.index(caseId);
 	}
 	
-	@RequestMapping(path = "messages/{id}", method = RequestMethod.GET)
-	public MessagePost show(@PathVariable int id) {
-		return dao.show(id);
+	@RequestMapping(path = "caseItems/{caseId}/messages/{id}", method = RequestMethod.GET)
+	public MessagePost show(@PathVariable int caseId, @PathVariable int id) {
+		return dao.show(caseId, id);
 	}
 	
-	@RequestMapping(path = "messages", method = RequestMethod.POST)
-	public MessagePost create(@RequestBody String jsonMessagePost) {
-		return dao.create(jsonMessagePost);
+	@RequestMapping(path = "caseItems/{caseId}/messages", method = RequestMethod.POST)
+	public MessagePost create(@PathVariable int caseId, @RequestBody String jsonMessagePost) {
+		return dao.create(caseId, jsonMessagePost);
 	}
 	
-	@RequestMapping(path = "messages/{id}", method = RequestMethod.PUT)
-	public MessagePost update(@PathVariable int id, @RequestBody String jsonMessagePost) {
-		return dao.update(id, jsonMessagePost);
+	@RequestMapping(path = "caseItems/{caseId}/messages/{id}", method = RequestMethod.PUT)
+	public MessagePost update(@PathVariable int caseId, @PathVariable int id, @RequestBody String jsonMessagePost) {
+		return dao.update(caseId, id, jsonMessagePost);
 	}
 	
-	@RequestMapping(path = "messages/{id}", method = RequestMethod.DELETE)
-	public boolean destroy(@PathVariable int id) {
-		return dao.destroy(id);
+	@RequestMapping(path = "caseItems/{caseId}/messages/{id}", method = RequestMethod.DELETE)
+	public boolean destroy(@PathVariable int caseId, @PathVariable int id) {
+		return dao.destroy(caseId, id);
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import entities.CaseItem;
 import entities.MessagePost;
 
 @Transactional
@@ -22,25 +23,26 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 	private EntityManager em;
 
 	@Override
-	public Set<MessagePost> index() {
-		String query = "SELECT m FROM Message m";
-		List<MessagePost> allMessagesList = em.createQuery(query, MessagePost.class).getResultList();
+	public Set<MessagePost> index(int caseId) {
+		String query = "SELECT m FROM MessagePost m WHERE m.caseItem.id = :caseId";
+		List<MessagePost> allMessagesList = em.createQuery(query, MessagePost.class).setParameter("caseId",  caseId).getResultList();
 		Set<MessagePost> allMessagesSet = new HashSet<>(allMessagesList);
 
 		return allMessagesSet;
 	}
 
 	@Override
-	public MessagePost show(int id) {
+	public MessagePost show(int caseId, int id) {
 		return em.find(MessagePost.class, id);
 	}
 
 	@Override
-	public MessagePost create(String jsonMessagePost) {
+	public MessagePost create(int caseId, String jsonMessagePost) {
 		ObjectMapper mapper = new ObjectMapper();
 		MessagePost mp = null;
 		try {
 			mp = mapper.readValue(jsonMessagePost, MessagePost.class);
+			mp.setCaseItem(em.find(CaseItem.class, caseId));
 			em.persist(mp);
 			em.flush();
 
@@ -51,12 +53,13 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 	}
 
 	@Override
-	public MessagePost update(int id, String jsonMessagePost) {
+	public MessagePost update(int caseId, int id, String jsonMessagePost) {
 		MessagePost managed = em.find(MessagePost.class, id);
 		MessagePost updated = null;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			updated = mapper.readValue(jsonMessagePost, MessagePost.class);
+			updated.setCaseItem(em.find(CaseItem.class, caseId));
 			managed.setCaseItem(updated.getCaseItem());
 			managed.setCreateDate(updated.getCreateDate());
 			managed.setText(updated.getText());
@@ -68,7 +71,7 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 	}
 
 	@Override
-	public boolean destroy(int id) {
+	public boolean destroy(int caseId, int id) {
 		try {
 			MessagePost mp = em.find(MessagePost.class, id);
 			em.remove(mp);
