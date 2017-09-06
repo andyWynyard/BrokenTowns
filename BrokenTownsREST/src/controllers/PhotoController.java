@@ -45,7 +45,7 @@ public class PhotoController {
 		return dao.update(id, photoJson);
 	}
 	
-	@RequestMapping(path="photo/{ip}", method=RequestMethod.DELETE)
+	@RequestMapping(path="photo/{id}", method=RequestMethod.DELETE)
 	public boolean destroy(@PathVariable int id, HttpServletResponse res) {
 		return dao.destroy(id);
 	}

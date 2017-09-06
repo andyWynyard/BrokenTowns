@@ -24,5 +24,12 @@ angular.module('appModule')
 			})
 		}
 		
+		service.show = function(caseId, messageId) {
+			return $http({
+				method : 'GET',
+				url : 'caseItems/'+ caseId + '/messages/' + messageId
+			})
+		}
+		
 		return service;
 	})

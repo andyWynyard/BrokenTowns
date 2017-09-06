@@ -1,6 +1,6 @@
 package data;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 	public Set<MessagePost> index(int caseId) {
 		String query = "SELECT m FROM MessagePost m WHERE m.caseItem.id = :caseId";
 		List<MessagePost> allMessagesList = em.createQuery(query, MessagePost.class).setParameter("caseId",  caseId).getResultList();
-		Set<MessagePost> allMessagesSet = new HashSet<>(allMessagesList);
+		Set<MessagePost> allMessagesSet = new LinkedHashSet<>(allMessagesList);
 
 		return allMessagesSet;
 	}

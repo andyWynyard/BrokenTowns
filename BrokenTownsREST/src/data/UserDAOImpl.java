@@ -1,6 +1,6 @@
 package data;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
 	public Set<User> index() {
 		String query = "SELECT u FROM User u";
 		List<User> tempList = em.createQuery(query, User.class).getResultList();
-		Set<User> users = new HashSet<>(tempList);
+		Set<User> users = new LinkedHashSet<>(tempList);
 		return users;
 	}
 
