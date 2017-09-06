@@ -2,8 +2,6 @@ angular.module('appModule').component('navigation', {
 	templateUrl : 'app/appModule/navigation.component.html',
 	controller : function(authService) {
 		var vm = this;
-
-		vm.showLogin = true;
 		
 		console.log("before check login: " + vm.showLogin);
 		
@@ -15,7 +13,6 @@ angular.module('appModule').component('navigation', {
 			return false;
 		}
 		
-//		vm.showLogin = vm.checkLogin();
 		console.log("After checkLogin: " +vm.showLogin);
 
 	},
