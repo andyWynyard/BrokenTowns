@@ -9,6 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="photo")
 public class Photo {
@@ -21,12 +24,14 @@ public class Photo {
 
 	@OneToOne
 	@JoinColumn(name = "case_item_id")
+	@JsonBackReference(value="photoToCaseItem")
 	private CaseItem caseItem;
 
 	private String s3Key;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	public String getUrl() {
