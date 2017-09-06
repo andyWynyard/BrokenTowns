@@ -12,7 +12,8 @@
 		
 		<li><a href="#/">Home</a></li>
        <li><a href="#/login" ng-hide="vm.checkLogin()">Login</a></li>
-       <li><a href="#/register">Register</a></li>
+	  <logout ng-show="vm.checkLogin()"></logout>
+       <li><a href="#/register" ng-hide=vm.checkLogin()>Register</a></li>
      </ul>
    </div>
  </div>
