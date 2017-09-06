@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="well">
+		<h3>Search it up!</h3>
+			<input type="search" placeholder="Search for Cases" ng-model="caseItem">
+	</div>
+	<div class="well" ng-show="vm.searchResults.length > 0">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><strong>Title</strong></td>
+					<td><strong>Municipality</strong></td>
+					<td><strong>Severity</strong></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="result in vm.searchResults | filter:search" ng-click="vm.selected=result">
+					<td>{{result.title}}</td>
+					<td>{{result.Municipality}}</td>
+					<td>{{result.Severity}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

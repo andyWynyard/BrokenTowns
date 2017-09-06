@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="well">
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
-		<h2>Your Remaining Projects: <span class="label label-success">{{vm.user.caseItems.size}}</span></h2>
+		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
 	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="well">
 		<table class="table table-striped well">
@@ -15,7 +15,7 @@
 		  </thead>
 		  
 		  <tbody>
-		  	<tr ng-repeat="caseItem in vm.user.caseItems" ng-click="vm.selected = caseItem">
+		  	<tr ng-repeat="caseItem in vm.caseItems" ng-click="vm.selected = caseItem">
 		  		<td>{{caseItem.title}}</td>
 		  		<td>{{caseItem.severity}}</td>
 		  		<td>{{caseItem.description}}</td>
@@ -39,6 +39,7 @@
 				<td>{{message.text}}</td>
 			</tr>
 		</table>
+		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
 	</div>
 	
 	
