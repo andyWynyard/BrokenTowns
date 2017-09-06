@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -28,8 +29,7 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name="municipality_id")
-	//@JsonManagedReference(value="userToMunicipality")
-	@JsonIgnore
+
 	private Municipality municipality;
 
 	private String email;
