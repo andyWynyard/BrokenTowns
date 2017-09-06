@@ -3,8 +3,8 @@
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.user.caseItems.size}}</span></h2>
 	</div>
-	<div class="well">
-		<table ng-show="vm.user.caseItems.size > 0" class="table table-striped well">
+	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="well">
+		<table class="table table-striped well">
 		  <thead>
 		  	<tr>
 		  	  <td>Project Name</td>
@@ -15,7 +15,7 @@
 		  </thead>
 		  
 		  <tbody>
-		  	<tr ng-repeat="caseItem in vm.user.caseItems">
+		  	<tr ng-repeat="caseItem in vm.user.caseItems" ng-click="vm.selected = caseItem">
 		  		<td>{{caseItem.title}}</td>
 		  		<td>{{caseItem.severity}}</td>
 		  		<td>{{caseItem.description}}</td>
@@ -23,6 +23,21 @@
 		  	</tr>
 		  </tbody>
 		
+		</table>
+	</div>
+	
+	<div class="well" ng-show="vm.selected">
+		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
+		<img src="{{vm.selected.photo.url}}"/>
+		<p>{{vm.selected.description}}</p>
+		<ul>
+			<li>Lat: {{vm.selected.latitude}}</li>
+			<li>Long: {{vm.selected.longitude}}</li>
+		</ul>
+		<table class="table table-striped">
+			<tr ng-repeat="message in vm.messages">
+				<td>{{message.text}}</td>
+			</tr>
 		</table>
 	</div>
 	
