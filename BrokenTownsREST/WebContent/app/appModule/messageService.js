@@ -18,5 +18,12 @@ angular.module('appModule')
 			
 		}
 		
+		service.create = function(caseId) {
+			return $http({
+				method : 'POST',
+				url : 'caseItems/' + caseId + '/messages'
+			})
+		}
 		
+		return service;
 	})
