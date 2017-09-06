@@ -5,7 +5,12 @@ angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModul
 			}).when('/register', {
 				template : '<register></register>'
 			}).when('/login', {
-				template : '<login></login>'
+				template : '<login></login>' 
+			}).when('/municipality', {
+				template : '<municipality></municipality>'
+			}) .when('/user', {
+				template : '<user></user>'
+		
 			}).otherwise({
 				template : '<not-found></not-found>'
 			})
