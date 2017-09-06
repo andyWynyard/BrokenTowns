@@ -14,9 +14,26 @@ angular.module('appModule')
 		}
 		setUser();
 		
+		vm.selected = null;
+		
+		vm.setSeverityColor = function() {
+			var severe = vm.selected.severity;
+			if (severe == 5) {
+				return "red";
+			} else if (severe == 4) {
+				return "orange";
+			} else if (severe == 3) {
+				return "yellow";
+			} else if (severe == 2) {
+				return "yellow-green";
+			} else if (severe == 1) {
+				return "green";
+			}
+		}
+		
 		vm.messages =[];
-		vm.showMessages = function(caseId) {
-			messageService.index(caseId)
+		vm.showMessages = function() {
+			messageService.index(vm.selected.id)
 				.then(function(response) {
 					vm.messages = response.data;
 					console.log(vm.messages);
