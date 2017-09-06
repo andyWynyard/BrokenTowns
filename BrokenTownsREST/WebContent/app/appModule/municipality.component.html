@@ -1,0 +1,30 @@
+<div class="container">
+	<div class="well">
+		<h1>Welcome, {{vm.municipality.name}}</h1>
+		<img src="{{vm.municipality.pic}}"/>
+		
+		<h2>Remaining Projects: <span class="label label-success">{{vm.caseItems.size}}</span></h2>
+	</div>
+	<div class="well">
+		<table ng-show="vm.caseItems.size > 0" class="table table-striped well">
+		  <thead>
+		  	<tr>
+		  	  <td>Project Name</td>
+		  	  <td>Severity</td>
+		  	  <td>description</td>
+		  	  <td>Completed?</td>
+		  	</tr>
+		  </thead>
+		  
+		  <tbody>
+		  	<tr ng-repeat="caseItem in vm.caseItems">
+		  		<td>{{caseItem.title}}</td>
+		  		<td>{{caseItem.severity}}</td>
+		  		<td>{{caseItem.description}}</td>
+		  		<td>{{caseItem.done}}</td>
+		  	</tr>
+		  </tbody>
+		
+		</table>
+	</div>
+</div>
