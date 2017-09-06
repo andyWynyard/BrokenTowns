@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import entities.CaseItem;
 import entities.Photo;
+import entities.PhotoDTO;
+import entities.User;
 
 @Transactional
 @Repository
@@ -32,16 +35,19 @@ public class PhotoDAOImpl implements PhotoDAO {
 
 	@Override
 	public Photo show(int id) {
-		em.find(Photo.class, id);
-		return null;
+		return em.find(Photo.class, id);
+
 	}
 
 	@Override
 	public Photo create(String photoJson) {
 		ObjectMapper om = new ObjectMapper();
 		Photo p = null;
+		PhotoDTO dto = null;
 		try {
-			p = om.readValue(photoJson, Photo.class);
+			
+			dto = om.readValue(photoJson, PhotoDTO.class);
+			p = generatePhoto(dto);
 			em.persist(p);
 			em.flush();
 			return p;
@@ -82,6 +88,15 @@ public class PhotoDAOImpl implements PhotoDAO {
 			removed = false;
 		}
 		return removed;
+	}
+	
+	private Photo generatePhoto(PhotoDTO dto) {
+		Photo p = new Photo();
+		p.setaCase(em.find(CaseItem.class, dto.getCaseItemId()));
+		p.setS3Key(dto.getS3Key());
+		p.setUrl(dto.getUrl());
+		p.setUser(em.find(User.class, dto.getUserId()));
+		return p;
 	}
 
 }
