@@ -12,7 +12,7 @@ angular.module('appModule')
 				})
 		}
 		
-		vm.showMessages(1);
+		vm.showMessages();
 		
 	},
 	
