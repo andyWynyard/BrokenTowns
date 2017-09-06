@@ -15,7 +15,7 @@
 		  </thead>
 		  
 		  <tbody>
-		  	<tr ng-repeat="caseItem in vm.user.caseItems" ng-click="vm.selected = caseItem">
+		  	<tr ng-repeat="caseItem in vm.caseItems" ng-click="vm.selected = caseItem">
 		  		<td>{{caseItem.title}}</td>
 		  		<td>{{caseItem.severity}}</td>
 		  		<td>{{caseItem.description}}</td>
@@ -39,6 +39,7 @@
 				<td>{{message.text}}</td>
 			</tr>
 		</table>
+		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
 	</div>
 	
 	
