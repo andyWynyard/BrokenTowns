@@ -1,7 +1,9 @@
 <form>
-	<input type="text" ng-model="user.email" required />
-	<input type="password" ng-model="user.password" required />
-	<input type="password" ng-model="user.confirm" required />
+	First Name<input type="text" ng-model="user.firstName" required/>
+	Last Name<input type="text" ng-model="user.lastName" required/>
+	Email<input type="text" ng-model="user.email" required />
+	Password<input type="password" ng-model="user.password" required />
+	Password Confirm<input type="password" ng-model="user.confirm" required />
 	<input type="submit" ng-disabled="vm.invalid(user)" ng-click="vm.register(user)" />
 </form>
 
