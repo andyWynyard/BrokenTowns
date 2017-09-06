@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,9 @@ import entities.User;
 @Transactional
 @Repository
 public class UserDAOImpl implements UserDAO {
+	
+	@Autowired
+	private AuthDAO dao;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -60,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
 			updated = mapper.readValue(userJson, User.class);
 			managed.setFirstName(updated.getFirstName());
 			managed.setLastName(updated.getLastName());
-			managed.setPassword(updated.getPassword());
+			managed.setPassword(dao.encryptPassword(updated.getPassword()));
 			managed.setEmail(updated.getEmail());
 
 			return managed;

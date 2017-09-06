@@ -41,4 +41,12 @@ public class AuthDAOImpl implements AuthDAO {
 		return null;
 	}
 
+	@Override
+	public String encryptPassword(String rawPassword) {
+		String encryptedPassword = encoder.encode(rawPassword);
+		return encryptedPassword;
+	}
+	
+	
+
 }
