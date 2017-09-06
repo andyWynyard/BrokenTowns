@@ -1,19 +1,20 @@
 angular.module('appModule')
 	.component('municipality', {
 		templateUrl :  "app/appModule/municipality.component.html",
-		controller  :  function(caseItemService) {
+		controller  :  function(caseItemService, $filter) {
 			var vm = this;
 			
 			vm.caseItems = [];
 			
+			//NEED A WAY TO GET MUNICIPALITY ID BASED ON USER
+			// vvvvvvvvv
 			vm.reload = function() {
 				caseItemService.index()
 					.then(function(res) {
-						caseItems = res.data;
-						//NEED TO INSERT FILTER!!
+						caseItems = $filter('municipalityCaseItemFilter')(res.data, vm.municipality.id);
 					});
 			}
-			
+			// ^^^^^^^^^
 			vm.municipality = {
 				name : "Practice",
 				state: "Practice State",
