@@ -4,6 +4,12 @@ angular.module('appModule')
 	controller : function($location, authService, userService, messageService) {
 		var vm = this;
 		
+		vm.caseItems = [];
+		
+		vm.getNumCaseItems = function() {
+			return vm.caseItems.length;
+		}
+		
 		var userId = authService.getToken().id;
 		vm.user = null;
 		var setUser = function() {

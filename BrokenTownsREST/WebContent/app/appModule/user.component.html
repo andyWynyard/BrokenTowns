@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="well">
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
-		<h2>Your Remaining Projects: <span class="label label-success">{{vm.user.caseItems.size}}</span></h2>
+		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
 	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="well">
 		<table class="table table-striped well">
