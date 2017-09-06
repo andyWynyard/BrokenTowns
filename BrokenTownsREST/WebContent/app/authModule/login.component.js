@@ -8,7 +8,7 @@ angular.module('authModule')
 			authService.login(user)
 				.then(function(res) {
 					console.log(res.data);
-					$location.path('/')
+					$location.path('/user')
 				})
 				.catch(console.error);
 		}
