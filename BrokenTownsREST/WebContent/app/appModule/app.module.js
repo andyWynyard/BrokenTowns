@@ -1,11 +1,13 @@
-angular.module('appModule', ['ngRoute', 'ui.bootstrap', 'ngCookies'])
-	.config(function($routeProvider) {
-		$routeProvider
-			.when('/', {
+angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModule' ]).config(
+		function($routeProvider) {
+			$routeProvider.when('/', {
 				template : '<home></home>'
-			})
-			.otherwise({
+			}).when('/register', {
+				template : '<register></register>'
+			}).when('/login', {
+				template : '<login></login>'
+			}).otherwise({
 				template : '<not-found></not-found>'
 			})
-	
-	})
+
+		})

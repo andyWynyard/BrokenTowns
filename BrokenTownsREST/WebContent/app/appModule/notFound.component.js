@@ -1,4 +1,4 @@
 angular.module('appModule')
 	.component('notFound', {
-		templateUrl : 'app/appModule/notFound.html'
+		templateUrl : 'app/appModule/notFound.component.html'
 	})
