@@ -17,6 +17,7 @@ import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "case_item")
@@ -55,6 +56,7 @@ public class CaseItem {
 
 	@OneToOne(mappedBy="caseItem")
 	@JoinColumn(name = "photo_url")
+	@JsonManagedReference(value="photoToCaseItem")
 	private Photo photo;
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
