@@ -9,13 +9,13 @@ angular.module('appModule').component('navigation', {
 		
 		vm.checkLogin = function() {
 			if (authService.getToken().id) {
-				return false;
+				return true;
 				console.log("inside of check login: "  + vm.showLogin);
 			}
-			return true;
+			return false;
 		}
 		
-		vm.showLogin = vm.checkLogin();
+//		vm.showLogin = vm.checkLogin();
 		console.log("After checkLogin: " +vm.showLogin);
 
 	},
