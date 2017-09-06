@@ -66,6 +66,8 @@ public class UserDAOImpl implements UserDAO {
 			managed.setLastName(updated.getLastName());
 			managed.setPassword(dao.encryptPassword(updated.getPassword()));
 			managed.setEmail(updated.getEmail());
+			managed.setAdmin(updated.isAdmin());
+			managed.setMunicipality(updated.getMunicipality());
 
 			return managed;
 		} catch (Exception e) {
