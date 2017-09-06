@@ -1,6 +1,6 @@
 package data;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +26,7 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 		String query = "SELECT m FROM Municipality m";
 		
 		List<Municipality> tempList = em.createQuery(query, Municipality.class).getResultList();
-		Set<Municipality> municipalities = new HashSet<>(tempList);
+		Set<Municipality> municipalities = new LinkedHashSet<>(tempList);
 		return municipalities;
 	}
 
