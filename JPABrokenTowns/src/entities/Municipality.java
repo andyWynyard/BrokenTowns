@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -25,6 +27,12 @@ public class Municipality {
 	private String state;
 
 	private String email;
+	
+	@OneToMany(mappedBy="municipality")
+	//@JsonBackReference(value="userToMunicipality")
+	@JsonIgnore
+	private List<User> users;
+	
 
 	@OneToMany(mappedBy = "municipality", fetch=FetchType.EAGER)
 	@JsonManagedReference(value = "caseToMunicipality")

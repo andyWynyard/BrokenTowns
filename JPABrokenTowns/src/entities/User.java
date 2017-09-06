@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="user")
@@ -25,8 +26,10 @@ public class User {
 	@Column(name="admin")
 	private boolean admin;
 
-	@OneToOne
-	@JoinColumn(name="municipality")
+	@ManyToOne
+	@JoinColumn(name="municipality_id")
+	//@JsonManagedReference(value="userToMunicipality")
+	@JsonIgnore
 	private Municipality municipality;
 
 	private String email;
@@ -68,11 +71,11 @@ public class User {
 		this.admin = admin;
 	}
 
-	public int getMunicipality() {
+	public Municipality getMunicipality() {
 		return municipality;
 	}
 
-	public void setMunicipality(int municipality) {
+	public void setMunicipality(Municipality municipality) {
 		this.municipality = municipality;
 	}
 
