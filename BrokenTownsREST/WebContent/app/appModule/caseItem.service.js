@@ -2,7 +2,7 @@ angular.module('appModule')
 	  .factory('caseItemService', function($http, authService, $location) {
 		  var service = {};
 		  
-		  var BASE_URL = "http://localhost:8080/ngTodo/api/caseItems/";
+		  var BASE_URL = "http://localhost:8080/BrokenTownsREST/api/caseItems/";
 		  
 		  var token = null;
 		   

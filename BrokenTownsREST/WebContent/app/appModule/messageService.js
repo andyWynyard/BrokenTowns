@@ -13,7 +13,6 @@ angular.module('appModule')
 			return $http({
 				method : 'GET',
 				url : 'api/caseItems/' + caseId + '/messages'
-				
 			})
 			
 		}

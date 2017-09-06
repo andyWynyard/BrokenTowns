@@ -1,6 +1,35 @@
-<h1>THE USER PAGE</h1>
-<div>
-<ul>
-	<li ng-repeat="messages in vm.messages">{{messages.text}}</li>
-</ul>
+<div class="container">
+	<div class="well">
+		<h1>Welcome, {{vm.user.firstName}}!</h1>
+		<h2>Your Remaining Projects: <span class="label label-success">{{vm.user.caseItems.size}}</span></h2>
+	</div>
+	<div class="well">
+		<table ng-show="vm.user.caseItems.size > 0" class="table table-striped well">
+		  <thead>
+		  	<tr>
+		  	  <td>Project Name</td>
+		  	  <td>Severity</td>
+		  	  <td>description</td>
+		  	  <td>Completed?</td>
+		  	</tr>
+		  </thead>
+		  
+		  <tbody>
+		  	<tr ng-repeat="caseItem in vm.user.caseItems">
+		  		<td>{{caseItem.title}}</td>
+		  		<td>{{caseItem.severity}}</td>
+		  		<td>{{caseItem.description}}</td>
+		  		<td>{{caseItem.done}}</td>
+		  	</tr>
+		  </tbody>
+		
+		</table>
+	</div>
+	
+	
+	
+		<!-- MESSAGES -->
+		<ul>
+			<li ng-repeat="messages in vm.messages">{{messages.text}}</li>
+		</ul>
 </div>
