@@ -10,7 +10,8 @@ angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModul
 				template : '<municipality></municipality>'
 			}) .when('/user', {
 				template : '<user></user>'
-		
+			}).when('/search', {
+				template : '<search></search'
 			}).otherwise({
 				template : '<not-found></not-found>'
 			})
