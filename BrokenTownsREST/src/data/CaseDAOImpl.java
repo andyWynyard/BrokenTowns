@@ -1,6 +1,6 @@
 package data;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public class CaseDAOImpl implements CaseDAO {
 		String query = "SELECT c FROM CaseItem c";
 		List<CaseItem> caseList = em.createQuery(query, CaseItem.class).getResultList();
 
-		Set<CaseItem> allCases = new HashSet<>(caseList);
+		Set<CaseItem> allCases = new LinkedHashSet<>(caseList);
 		return allCases;
 	}
 
