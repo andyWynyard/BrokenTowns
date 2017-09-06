@@ -4,15 +4,21 @@ angular.module('authModule')
 	controller : function(authService, $location) {
 		var vm = this;
 		
+		vm.errors = [];
+			
 		vm.login = function(user) {
+			vm.errors = [];
+		
 			authService.login(user)
 				.then(function(res) {
 					console.log(res.data);
 					$location.path('/user')
+					return true;
 				})
-				.catch(console.error);
+				.catch();
+				vm.errors.push("Your email and/or password is incorrect. Please Try Again");
+				return vm.errors;
 		}
-		
 		
 	},
 	controllerAs : 'vm'
