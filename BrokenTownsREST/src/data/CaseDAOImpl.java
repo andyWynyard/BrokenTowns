@@ -66,14 +66,9 @@ public class CaseDAOImpl implements CaseDAO {
 			managed.setCompleteDate(updated.getCompleteDate());
 			managed.setDescription(updated.getDescription());
 			managed.setDone(updated.isDone());
-			managed.setLatitude(updated.getLatitude());
-			managed.setLongitude(updated.getLongitude());
 			managed.setMessagePosts(updated.getMessagePosts());
-			managed.setMunicipality(updated.getMunicipality());
-			managed.setPhoto(updated.getPhoto());
 			managed.setSeverity(updated.getSeverity());
 			managed.setTitle(updated.getTitle());
-			managed.setUser(updated.getUser());
 
 		} catch (Exception e) {
 			e.printStackTrace();
