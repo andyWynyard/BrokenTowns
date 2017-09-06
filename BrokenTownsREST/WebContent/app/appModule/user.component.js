@@ -10,6 +10,7 @@ angular.module('appModule')
 			userService.show(userId)
 			.then(function(res) {
 				vm.user = res.data;
+				console.log("USER NAME = " + vm.user.firstName)
 			})
 		}
 		setUser();
@@ -17,27 +18,31 @@ angular.module('appModule')
 		vm.selected = null;
 		
 		vm.setSeverityColor = function() {
-			var severe = vm.selected.severity;
-			if (severe == 5) {
-				return "red";
-			} else if (severe == 4) {
-				return "orange";
-			} else if (severe == 3) {
-				return "yellow";
-			} else if (severe == 2) {
-				return "yellow-green";
-			} else if (severe == 1) {
-				return "green";
+			if (vm.selected !=null) {
+				var severe = vm.selected.severity;
+				if (severe == 5) {
+					return "red";
+				} else if (severe == 4) {
+					return "orange";
+				} else if (severe == 3) {
+					return "yellow";
+				} else if (severe == 2) {
+					return "yellow-green";
+				} else if (severe == 1) {
+					return "green";
+				}
 			}
 		}
 		
 		vm.messages =[];
 		vm.showMessages = function() {
-			messageService.index(vm.selected.id)
-				.then(function(response) {
-					vm.messages = response.data;
-					console.log(vm.messages);
-				})
+			if (vm.selected != null) {
+				messageService.index(vm.selected.id)
+					.then(function(response) {
+						vm.messages = response.data;
+						console.log(vm.messages);
+					})
+			}
 		}
 		vm.showMessages();
 		
