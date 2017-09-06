@@ -1,14 +1,8 @@
 angular.module('appModule')
 	.component('user', {
 	templateUrl : 'app/appModule/user.component.html',
-	controller : function($location, authService, userService, messageService) {
+	controller : function($location, authService, caseItemService, userService, messageService) {
 		var vm = this;
-		
-		vm.caseItems = [];
-		
-		vm.getNumCaseItems = function() {
-			return vm.caseItems.length;
-		}
 		
 		var userId = authService.getToken().id;
 		vm.user = null;
@@ -20,6 +14,30 @@ angular.module('appModule')
 			})
 		}
 		setUser();
+		
+		vm.caseItems = [];
+		
+		vm.loadCaseItems = function() {
+			caseItemService.index()
+			 .then(function(result) {
+				 console.log("USER ID: " + userId);
+				 var temp = result.data;
+				 temp.forEach(function(val) {
+					 console.log(val);
+					 console.log(val.user.id);
+					 if (val.user.id == userId) {
+						 vm.caseItems.push(val);
+					 }
+				 })
+				 console.log(vm.caseItems)
+			 })
+		}
+		
+		vm.loadCaseItems();
+		
+		vm.getNumCaseItems = function() {
+			return vm.caseItems.length;
+		}
 		
 		vm.selected = null;
 		

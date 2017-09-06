@@ -13,7 +13,7 @@
 		
 		<li><a href="#/">Home</a></li>
        <li><a href="#/login" ng-hide="vm.checkLogin()">Login</a></li>
-	 <logout class="nav-link active" ng-show="vm.checkLogin()"></logout>
+	   <li><a href="#/" ng-show="vm.checkLogin()" ng-click="vm.logout()">Logout</a>
        <li><a href="#/register" ng-hide=vm.checkLogin()>Register</a></li>
      </ul>
    </div>
