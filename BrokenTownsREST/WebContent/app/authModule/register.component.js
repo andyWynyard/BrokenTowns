@@ -17,16 +17,25 @@ angular.module('authModule')
 			
 			var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 			
+			if(!user.firstName) {
+				vm.errors.push("You must have a first name");
+			}
+			
+			if(!user.lastName) {
+				vm.errors.push("You must have a last name");
+			}
+			
+			
 			if (!re.test(user.email)) {
 				vm.errors.push("Your email is not an email");
 			}
 			if (!user.password || user.password.length < 6) {
-				vm.errors.push("You must include a password, of at least 6 characters etc etc")
+				vm.errors.push("You must include a password, of at least 6 characters")
 			}
 			if (user.password !== user.confirm) {
 				vm.errors.push("Your passwords do not match");
 			}
-			
+
 			if (vm.errors.length > 0) {
 				return;
 			}
@@ -35,7 +44,7 @@ angular.module('authModule')
 			
 			authService.register(user)
 				.then(function(res) {
-					$location.path('/todo');
+					$location.path('/login');
 				})
 				.catch(console.error)
 		}
