@@ -13,3 +13,18 @@
 .green {
 	color : green;
 }
+
+.logout {
+	background-color: transparent;
+	color: #9d9d9d;
+	border : none;
+	outline : none;
+	margin-top : 11%;
+
+}
+.logout button:hover {
+	color: #fefefe;
+}
+
+
+
