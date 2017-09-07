@@ -11,9 +11,15 @@ angular.module('authModule')
 		
 			authService.login(user)
 				.then(function(res) {
-					console.log(res.data);
+					if(res.data.municipality === null) {
 					$location.path('/user')
+					console.log("municipality id inside of login component.js is: " + res.data.municipality);
 					return true;
+					} else if(res.data.municipality !== null) {
+						$location.path('/municipality')
+						return true;
+					}
+		
 				})
 				.catch();
 				vm.errors.push("Your email and/or password is incorrect. Please Try Again");
