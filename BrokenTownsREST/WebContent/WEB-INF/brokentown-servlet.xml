@@ -16,10 +16,10 @@
 
 	<context:component-scan base-package="controllers" />
 
-	<bean id="myEntityManagerFactory"
+	<!-- <bean id="myEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="brokentown" />
-	</bean>
+	</bean> -->
 
 	<bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="myEntityManagerFactory" />
@@ -39,6 +39,54 @@
 	</mvc:interceptors> -->
 
 	<!-- additional servlet content -->
+	
+	
+	
+		<!-- NEW STUFF FOR RDS -->
+	
+	<bean id="dataSource"
+  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+  <property name="driverClassName" value="${rds_driver}" />
+  <property name="url"
+    value="${rds_jdbc_host}" />
+  <property name="username" value="${rds_mysql_user}" />
+  <property name="password" value="${rds_mysql_password}" />
+</bean>
+
+ <bean id="persistenceExceptionTranslationPostProcessor"
+  class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+ 
+	<!-- This loads the properties file -->
+
+
+
+ <bean id="properties"
+  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="location" value="classpath:rds.properties" />
+</bean>
+
+
+
+
+
+
+<bean id="myEntityManagerFactory"
+  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+  <property name="dataSource" ref="dataSource" />
+  <property name="packagesToScan" value="entities" />
+  <property name="jpaVendorAdapter">
+    <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+  </property>
+  <property name="jpaProperties">
+    <props>
+      <prop key="hibernate.show_sql">false</prop>
+          <prop key="hibernate.format_sql">false</prop>
+      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+      <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+    </props>
+  </property>
+</bean>
+	
 	
 	
 	
