@@ -30,6 +30,10 @@ angular.module('appModule')
 		  }
 		  
 		  service.create = function(caseItem) {
+			  // TEMPORARY STUFF, MUST REMOVE PLZ:
+			  caseItem.municipalityId = 3;
+			  caseItem.longitude = "231";
+			  caseItem.latitude = "123";
 			  checkLogin();
 			  refreshToken();
 			  caseItem.done = false;
