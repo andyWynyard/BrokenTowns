@@ -1,13 +1,33 @@
 <div class="container">
-	<div class="well">
-		<h3>Search it up!</h3>
-			<input type="search" placeholder="Search for Cases" ng-model="caseItem">
+	<div class="well" ng-hide="vm.selected">
+		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true">Create New Case</button>
+		<div ng-show="vm.createNew">
+			<form>
+				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
+				<input type="text" placeholder="Description" ng-model="newCase.description"><br>
+				<select ng-model="newCase.severity">
+					<option value="" selected disabled hidden>Set Severity</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select><br>
+				<!-- <input type="text" placeholder="Picture URL" ng-model="newCase.photo"><br><br> -->
+				<button type="btn" class="btn btn-info" ng-click="vm.create(newCase); vm.createNew = false; newCase = null;">Create</button>
+				<button type="btn" class="btn btn-danger" ng-click="vm.createNew = false; newCase = null;">Cancel</button>
+			</form>
+		</div>
 	</div>
-	<div class="well" ng-show="vm.searchResults.length > 0">
+	<div class="well" ng-hide="vm.selected">
+		<h3>Search it up!</h3>
+			<input class="searchbar" type="search" placeholder="Search for Cases" ng-model="search">
+	</div>
+	<div class="well" ng-hide="vm.selected" ng-show="vm.searchResults.length > 0">
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<td><strong>Title</strong></td>
+					<td><strong>Name</strong></td>
 					<td><strong>Municipality</strong></td>
 					<td><strong>Severity</strong></td>
 				</tr>
@@ -15,10 +35,25 @@
 			<tbody>
 				<tr ng-repeat="result in vm.searchResults | filter:search" ng-click="vm.selected=result">
 					<td>{{result.title}}</td>
-					<td>{{result.Municipality}}</td>
-					<td>{{result.Severity}}</td>
+					<td>{{result.municipality.name}}</td>
+					<td>{{result.severity}}</td>
 				</tr>
 			</tbody>
 		</table>
+	</div>
+	<div class="well" ng-show="vm.selected">
+		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
+		<img src="{{vm.selected.photo.url}}"/>
+		<p>{{vm.selected.description}}</p>
+		<ul>
+			<li>Lat: {{vm.selected.latitude}}</li>
+			<li>Long: {{vm.selected.longitude}}</li>
+		</ul>
+		<table class="table table-striped">
+			<tr ng-repeat="message in vm.messages">
+				<td>{{message.text}}</td>
+			</tr>
+		</table>
+		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
 	</div>
 </div>
