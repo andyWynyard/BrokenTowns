@@ -31,5 +31,19 @@ angular.module('appModule')
 			})
 		}
 		
+		service.update = function(caseId, messageId) {
+			return $http({
+				method : 'PUT',
+				url : 'caseItems/' + caseId + '/messages/ ' + 'messageId'
+			})
+		}
+		
+		service.destroy = function(caseId, messageId) {
+			return $http({
+				method: 'DELETE',
+				url : 'caseItems/' + caseId + '/messages/ ' + 'messageId'
+			})
+		}
+		
 		return service;
 	})
