@@ -56,16 +56,7 @@
  <bean id="persistenceExceptionTranslationPostProcessor"
   class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  
-	<!-- This loads the properties file -->
-
-
-
- <bean id="properties"
-  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-  <property name="location" value="classpath:rds.properties" />
-</bean>
-
-
+	
 
 
 
@@ -102,4 +93,44 @@
 	
 
 	<tx:annotation-driven transaction-manager="myTransactionManager" />
+	
+	 <!-- This is how you can upload files -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000" />
+	</bean>
+	
+	
+	<!-- This loads the .properties file(s) by name -->
+	<!-- This loads the properties file -->
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+      <list>
+        <value>classpath:s3.properties</value>
+        <value>classpath:rds.properties</value>
+      </list>
+    </property>
+	</bean>
+	
+		<!-- This creates a credentials object from the .properties file values -->
+	<bean id="s3Credentials" class="com.amazonaws.auth.BasicAWSCredentials">
+		<constructor-arg type="String" value="${aws_access_key_id}" />
+		<constructor-arg type="String" value="${aws_secret_access_key}" />
+	</bean>
+
+	<!-- This creates an actual client using the credentials above -->
+	<bean id="amazonS3Client" class="com.amazonaws.services.s3.AmazonS3Client">
+		<constructor-arg type="AWSCredentials" ref="s3Credentials" />
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </beans>

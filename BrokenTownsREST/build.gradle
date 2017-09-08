@@ -43,18 +43,33 @@ repositories {
 
 dependencies {
     compile project(':JPABrokenTowns')
-	
-	compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.1.2.RELEASE' 
-    compile group: 'org.springframework', name: 'spring-webmvc', version:"$springVersion"
-    compile group: 'org.springframework', name: 'spring-orm', version:"$springVersion"
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
-    compile group: 'javax.servlet', name: 'jstl', version:'1.2'
-    compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.2.4.Final'
-    compile "org.springframework:spring-test:$springVersion"
-    compile "org.springframework:spring-tx:$springVersion"
+    
+      // AWS SDK
+  compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.171'
 
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.5'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.5'
+  // Servlet Dependencies
+  compile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+  compile group: 'javax.servlet', name: 'jstl', version:'1.2'
+
+  // Hibernate Validation
+  compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.2.4.Final'
+
+  // Spring Dependencies
+  compile group: 'org.springframework', name: 'spring-webmvc', version:"$springVersion"
+  compile group: 'org.springframework', name: 'spring-orm', version:"$springVersion"
+  compile "org.springframework:spring-tx:$springVersion"
+  compile group: 'org.springframework', name: 'spring-web', version: '3.0.4.RELEASE'
+  compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.1.2.RELEASE'
+  compile "org.springframework:spring-test:$springVersion"
+
+  // Apache - File Upload Dependencies
+  compile group: 'commons-io', name: 'commons-io', version: '2.5'
+  compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'
+
+  // Jackson REST Dependencies
+  compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.5'
+  compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.5'
+  
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
