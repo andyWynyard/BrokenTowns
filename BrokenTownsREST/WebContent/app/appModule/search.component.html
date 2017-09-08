@@ -14,7 +14,7 @@
 					<option value="5">5</option>
 				</select><br>
 				<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
-					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker();">
+					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker()" ng-model="newCase.latLong = vm.marker">
 					</ng-map>
 				</div>
 				<!-- <input type="text" placeholder="Picture URL" ng-model="newCase.photo"><br><br> -->
