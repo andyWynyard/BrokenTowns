@@ -1,9 +1,3 @@
-.map {
-	width: 100%;
-	height: 400px;
-	background-color: grey;
-}
-
 .searchbar {
 	width: 100%;
 }
@@ -35,4 +29,5 @@
 .logout button:hover {
 	color: #fefefe;
 }
+
 
