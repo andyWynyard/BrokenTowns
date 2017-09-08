@@ -13,7 +13,6 @@ angular.module('authModule')
 				.then(function(res) {
 					if(res.data.municipality === null) {
 					$location.path('/user')
-					console.log("municipality id inside of login component.js is: " + res.data.municipality);
 					return true;
 					} else if(res.data.municipality !== null) {
 						$location.path('/municipality')
