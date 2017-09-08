@@ -5,6 +5,7 @@
 			<form>
 				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
 				<input type="text" placeholder="Description" ng-model="newCase.description"><br>
+				<input type="file" name="file" ng-file="vm.file">
 				<select ng-model="newCase.severity">
 					<option value="" selected disabled hidden>Set Severity</option>
 					<option value="1">1</option>
@@ -17,7 +18,7 @@
 					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker()" ng-model="newCase.latLong = vm.marker">
 					</ng-map>
 				</div>
-				<!-- <input type="text" placeholder="Picture URL" ng-model="newCase.photo"><br><br> -->
+				
 				<button type="btn" class="btn btn-info" ng-click="vm.create(newCase); vm.createNew = false; newCase = null;">Create</button>
 				<button type="btn" class="btn btn-danger" ng-click="vm.createNew = false; newCase = null;">Cancel</button>
 			</form>
