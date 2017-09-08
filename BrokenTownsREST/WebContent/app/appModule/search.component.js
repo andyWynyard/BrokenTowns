@@ -100,9 +100,6 @@ angular.module('appModule')
 					placeMarker(event.latLng);
 					vm.marker = event.latLng;
 					console.log("MARKER: " + vm.marker);
-//					vm.selectedLatLong.lat = vm.marker.lng["[[Scopes]]"]["0"].a;
-//					vm.selectedLatLong.long = vm.marker.lng["[[Scopes]]"]["0"].b;
-//					console.log("LAT LONG OBJECT: " + vm.selectedLatLong);
 				});
 				var marker;
 				function placeMarker(location) {
@@ -119,7 +116,6 @@ angular.module('appModule')
 			}
 
 			}
-
 			
 			
 		},
