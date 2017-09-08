@@ -56,7 +56,7 @@
 		<!-- MAPS STUFF -->
 		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
 			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9">
-			<marker position="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]"></marker>
+				<marker position="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]"></marker>
 			</ng-map>
 		</div>
 		<table class="table table-striped">
