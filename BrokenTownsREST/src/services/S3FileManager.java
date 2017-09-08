@@ -55,5 +55,14 @@ public class S3FileManager implements S3Service {
 			return false;
 		}
 	}
+	
+	  private String getUploadURL(String fileName) {
+	        StringBuilder sb = new StringBuilder();
+	        sb.append("https://");
+	        sb.append(this.bucketName);
+	        sb.append(".s3.amazonaws.com/");
+	        sb.append(fileName);
+	        return sb.toString();
+	    }
 
 }
