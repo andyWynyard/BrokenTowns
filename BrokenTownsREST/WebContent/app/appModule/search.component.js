@@ -1,12 +1,22 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(caseItemService, authService, NgMap, $scope) {
+		controller   : function(caseItemService, authService, NgMap, $scope, municipalityService) {
 			var vm = this;
 			
 			vm.map = null;
 			
 			vm.marker = null;
+			
+			vm.municipalities = null;
+			
+			vm.loadAllMunicipalities = function() {
+				municipalityService.index()
+					.then(function(results) {
+						vm.municipalities = results.data;
+					});
+			}
+			vm.loadAllMunicipalities();
 			
 			vm.selectedLatLong = {};
 			
@@ -59,6 +69,7 @@ angular.module('appModule')
 			vm.mapKey = "AIzaSyAM7sMRVwpJLTHY4KScoaPnpnjlZDRH3xg";
 
 			vm.applySelected = function(caseItem) {
+				console.log(caseItem);
 				vm.selected = caseItem;
 				NgMap.getMap("map").then(
 						function(map) {
