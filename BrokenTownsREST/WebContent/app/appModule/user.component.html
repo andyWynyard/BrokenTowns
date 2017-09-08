@@ -1,4 +1,5 @@
 <div class="container">
+<!-- <ng-map center="[38,-77]" zoom="9"></ng-map> -->
 	<div class="well">
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
@@ -15,7 +16,7 @@
 		  </thead>
 		  
 		  <tbody>
-		  	<tr ng-repeat="caseItem in vm.caseItems" ng-click="vm.selected = caseItem">
+		  	<tr ng-repeat="caseItem in vm.caseItems" ng-click="vm.applySelected(caseItem)">
 		  		<td>{{caseItem.title}}</td>
 		  		<td>{{caseItem.severity}}</td>
 		  		<td>{{caseItem.description}}</td>
@@ -26,7 +27,7 @@
 		</table>
 	</div>
 	
-	<div class="well" ng-show="vm.selected">
+	<div class="well" ng-if="vm.selected">
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
 		<img src="{{vm.selected.photo.url}}"/>
 		<p>{{vm.selected.description}}</p>
@@ -40,9 +41,16 @@
 			</tr>
 		</table>
 		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
+
+		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
+			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9"></ng-map>
+		</div>
+		
 	</div>
 	
+	<!-- Maps stuff -->
 	
+	 
 	
 		<!-- MESSAGES -->
 		<ul>
