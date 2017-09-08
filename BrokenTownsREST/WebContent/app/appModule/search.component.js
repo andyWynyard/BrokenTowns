@@ -6,6 +6,10 @@ angular.module('appModule')
 			
 			vm.map = null;
 			
+			vm.marker = null;
+			
+			vm.selectedLatLong = {};
+			
 			var userId = authService.getToken().id;
 			
 			vm.searchResults = [];
@@ -23,6 +27,12 @@ angular.module('appModule')
 			vm.create = function(newCase) {
 				newCase.userId = userId;
 				console.log(newCase.userId);
+				console.log(newCase.latLong);
+				newCase.latitude = newCase.latLong.lat();
+				newCase.longitude = newCase.latLong.lng();
+				console.log(newCase.latitude);
+				console.log(newCase.longitude);
+				delete newCase.latLong;
 				caseItemService.create(newCase)
 					.then(function() {
 						vm.loadAllCases();
@@ -88,13 +98,17 @@ angular.module('appModule')
 			vm.addMarker = function() {
 				google.maps.event.addListener(vm.map, 'click', function(event) {
 					placeMarker(event.latLng);
+					vm.marker = event.latLng;
+					console.log("MARKER: " + vm.marker);
+//					vm.selectedLatLong.lat = vm.marker.lng["[[Scopes]]"]["0"].a;
+//					vm.selectedLatLong.long = vm.marker.lng["[[Scopes]]"]["0"].b;
+//					console.log("LAT LONG OBJECT: " + vm.selectedLatLong);
 				});
 				var marker;
 				function placeMarker(location) {
 					if (marker) {
 						marker.setPosition(location);
 					} else {
-					
 						marker = new google.maps.Marker({
 						position: location,
 						map: vm.map,
