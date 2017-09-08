@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="well" ng-hide="vm.selected">
-		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true">Create New Case</button>
+		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true; vm.setLocation(); vm.getLocation(); ">Create New Case</button>
 		<div ng-show="vm.createNew">
 			<form>
 				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
@@ -13,6 +13,10 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select><br>
+				<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
+					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker();">
+					</ng-map>
+				</div>
 				<!-- <input type="text" placeholder="Picture URL" ng-model="newCase.photo"><br><br> -->
 				<button type="btn" class="btn btn-info" ng-click="vm.create(newCase); vm.createNew = false; newCase = null;">Create</button>
 				<button type="btn" class="btn btn-danger" ng-click="vm.createNew = false; newCase = null;">Cancel</button>
@@ -33,7 +37,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="result in vm.searchResults | filter:search" ng-click="vm.selected=result">
+				<tr ng-repeat="result in vm.searchResults | filter:search" ng-click="vm.selected=result; vm.applySelected(result);">
 					<td>{{result.title}}</td>
 					<td>{{result.municipality.name}}</td>
 					<td>{{result.severity}}</td>
@@ -41,7 +45,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="well" ng-show="vm.selected">
+	<div class="well" ng-if="vm.selected">
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
 		<img src="{{vm.selected.photo.url}}"/>
 		<p>{{vm.selected.description}}</p>
@@ -50,7 +54,8 @@
 			<li>Long: {{vm.selected.longitude}}</li>
 		</ul>
 		<!-- MAPS STUFF -->
-		<div class="well map">
+		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
+			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9"></ng-map>
 		</div>
 		<table class="table table-striped">
 			<tr ng-repeat="message in vm.messages">
