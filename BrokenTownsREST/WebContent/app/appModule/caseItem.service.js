@@ -30,8 +30,6 @@ angular.module('appModule')
 		  }
 		  
 		  service.create = function(caseItem) {
-			  // TEMPORARY STUFF, MUST REMOVE PLZ:
-			  caseItem.municipalityId = 3;
 			  checkLogin();
 			  refreshToken();
 			  caseItem.done = false;
