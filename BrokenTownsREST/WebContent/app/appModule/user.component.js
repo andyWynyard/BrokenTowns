@@ -5,6 +5,12 @@ angular.module('appModule').component(
 			controller : function($location, authService, caseItemService,
 					userService, messageService, $scope, NgMap) {
 				var vm = this;
+				
+				vm.showCreateTable = true;
+				
+				vm.flipVariable = function() {
+					vm.showCreateTable = false;
+				}
 
 				vm.map = null;
 
