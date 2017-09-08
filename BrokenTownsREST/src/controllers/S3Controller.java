@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import data.S3ImageDAO;
 import entities.Photo;
+import entities.PhotoDTO;
 import entities.User;
 
 @RestController
@@ -33,16 +34,9 @@ public class S3Controller {
 					@RequestParam("file") MultipartFile file,
 					@RequestParam("data") String dataJSON
 							  ) {
-			S3DataDTO data = null;
-			ObjectMapper om = new ObjectMapper();
-			try {
-				data = om.readValue(dataJSON, S3DataDTO.class);
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			User user = getUserFromRequest(req);
+			
 
-			return s3DAO.create(multipartToFile(file), user, file.getOriginalFilename(), data.getTitle(), data.getDescription());
+			return s3DAO.create(multipartToFile(file), dataJSON, file.getOriginalFilename());
 		}
 		
 		  // converts a multipart file to a file for s3 upload
