@@ -90,6 +90,9 @@
 	<bean id="petsdao4" class="data.CaseDAOImpl"/> 
 	<bean id="petsdao5" class="data.MunicipalityDAOImpl"/> 
 	<bean id="petsdao6" class="data.AuthDAOImpl"/>
+	<bean id="photoBean" class="data.S3ImageDAOImpl"/>
+	<bean id="servicePhotoBean" class="services.S3FileManager"/>
+	<bean id="keyGenBean" class="services.UniqueS3KeySHA256Generator"/>
 	
 
 	<tx:annotation-driven transaction-manager="myTransactionManager" />
