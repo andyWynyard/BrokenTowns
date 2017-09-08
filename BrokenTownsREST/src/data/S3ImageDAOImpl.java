@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import entities.CaseItem;
 import entities.Photo;
-import entities.User;
+import entities.PhotoDTO;
 import services.S3Service;
+import entities.User;
+
 
 @Transactional
 @Repository
@@ -25,28 +30,46 @@ public class S3ImageDAOImpl implements S3ImageDAO{
 		private S3Service s3;
 
 		@Override
-		public Photo create(File file, User user, String fileName) {
-			Photo image = new Photo();
+		public Photo create(File file, String dataJSON, String fileName) {
+			Photo image = null;
 			String s3Url = null;
+			PhotoDTO dto = null;
+			
 			
 			try {
 		      // use service to upload image and get URL response
-					 s3Url = s3.uploadFileToS3(user.getEmail() + fileName, file);
+					 s3Url = s3.uploadFileToS3(fileName, file);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			// create my own enitity (S3Image) to persist in database with association
 		    // to a user
-			image.setUser(user);
-			image.setUserFileName(fileName);
-			image.setUrl(s3Url);
-			image.setS3Key(s3Url.substring(s3Url.lastIndexOf("/")+1));
-
-			em.persist(image);
-			em.flush();
-
+			
+			ObjectMapper om = new ObjectMapper();
+			try {
+				dto = om.readValue(dataJSON, PhotoDTO.class);
+				dto.setS3Key(s3Url.substring(s3Url.lastIndexOf("/")+1));
+				dto.setUrl(s3Url);
+				image = generatePhoto(dto);	
+				
+				em.persist(image);
+				em.flush();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+	
+		
 			return image;
 
+		}
+		
+		private Photo generatePhoto(PhotoDTO dto) {
+			Photo p = new Photo();
+			p.setaCase(em.find(CaseItem.class, dto.getCaseItemId()));
+			p.setS3Key(dto.getS3Key());
+			p.setUrl(dto.getUrl());
+			p.setUser(em.find(User.class, dto.getUserId()));
+			return p;
 		}
 
 	

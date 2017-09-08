@@ -11,7 +11,7 @@ angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModul
 			}) .when('/user', {
 				template : '<user></user>'
 			}).when('/search', {
-				template : '<search></search'
+				template : '<search></search>'
 			}).otherwise({
 				template : '<not-found></not-found>'
 			})
