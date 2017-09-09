@@ -63,6 +63,7 @@
 		</ul>
 		</div>
 		<div class="col-md-6">
+			
 			<table>
 				<tr>
 					<th><h2>Messages</h2></th>
@@ -78,10 +79,15 @@
 					<td><button type="btn" class="btn btn-info" ng-click="vm.createMessage(vm.selected.id, message);  vm.showMessages(vm.selected.id); vm.changeVariableToTrue(); message={}">Create</button></td>
 					<td><button type="btn" class="btn btn-danger" ng-click="vm.changeVariableToTrue(); message={}">Don't Create</button>
 				</tr>
-				<tr ng-repeat="message in vm.messages">
-					<td>{{message.user.firstName}} {{message.user.lastName}}:  {{message.text}}<br><br> </td>
-				</tr>
 			</table>
+			<div id="messageBoard">
+			<table>
+				<tr ng-repeat="message in vm.messages">			
+					<td><div>{{message.user.firstName}} {{message.user.lastName}}:  {{message.text}}<br><br> </div></td>
+				</tr>	
+			</table>
+			</div>
+	
 			<!--End of Message Board -->
 		</div>
 		<!-- MAPS STUFF -->

@@ -34,3 +34,9 @@
 	margin-left: 60%;
 }
 
+#messageBoard {
+	overflow: auto;
+ 	max-height: 200px; 
+	
+}
+
