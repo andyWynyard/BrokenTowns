@@ -77,9 +77,9 @@
 					<td><input type="text" placeholder="Message" ng-model="message.text"/></td>
 					<td><button type="btn" class="btn btn-info" ng-click="vm.createMessage(vm.selected.id, message);  vm.showMessages(vm.selected.id); vm.changeVariableToTrue(); message={}">Create</button></td>
 					<td><button type="btn" class="btn btn-danger" ng-click="vm.changeVariableToTrue(); message={}">Don't Create</button>
-				</tr> 
+				</tr>
 				<tr ng-repeat="message in vm.messages">
-					<td>{{message.user.firstName}} {{message.user.lastName}}: {{message.text}}</td>
+					<td>{{message.user.firstName}} {{message.user.lastName}} <br>{{message.text}}<br><br> </td>
 				</tr>
 			</table>
 			<!--End of Message Board -->
