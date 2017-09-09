@@ -1,16 +1,34 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(caseItemService, authService, NgMap, $scope) {
+		controller   : function(caseItemService, messageService, authService, NgMap, $scope) {
 			var vm = this;
 			
 			vm.map = null;
 			
+			
 			vm.marker = null;
+			
+			vm.showCreateMessage = true;
+			
+			
+			vm.changeShowCreateMessageVariable= function() {
+				vm.showCreateMessage = false;
+			}
+			
+			vm.changeVariableToTrue = function() {
+				vm.showCreateMessage = true;
+			}
 			
 			vm.selectedLatLong = {};
 			
 			var userId = authService.getToken().id;
+			
+			vm.userid = authService.getToken().id;
+			
+			vm.userFirstName = authService.getToken().firstName;
+			
+			vm.userLastName = authService.getToken().lastName;
 			
 			vm.searchResults = [];
 			
@@ -115,6 +133,24 @@ angular.module('appModule')
 					vm.map.setCenter(location);
 			}
 
+			}
+			
+			vm.messages = [];
+	
+			vm.showMessages=function(caseId) {
+				messageService.index(caseId)
+					.then(function(response) {
+						vm.messages = response.data;
+						console.log(response.data);
+					})
+			}
+			
+			vm.showMessages();
+			
+			vm.createMessage = function(caseId, message)  {
+				messageService.create(caseId, message)
+					.then(function(response) {
+					})
 			}
 			
 			

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.CaseItem;
 import entities.MessagePost;
+import entities.User;
 
 @Transactional
 @Repository
@@ -37,12 +38,14 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 	}
 
 	@Override
-	public MessagePost create(int caseId, String jsonMessagePost) {
+	public MessagePost create(int caseId, String jsonMessagePost, User user) {
 		ObjectMapper mapper = new ObjectMapper();
 		MessagePost mp = null;
 		try {
 			mp = mapper.readValue(jsonMessagePost, MessagePost.class);
 			mp.setCaseItem(em.find(CaseItem.class, caseId));
+			mp.setUser(user);
+			
 			em.persist(mp);
 			em.flush();
 
