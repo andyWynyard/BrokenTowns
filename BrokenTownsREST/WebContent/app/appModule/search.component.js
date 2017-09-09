@@ -128,7 +128,7 @@ angular.module('appModule')
 
 			}
 			
-			//vm.createMessage(vm.selected.id, message);
+//			message stuff below
 			vm.showCreateMessage = true;
 			
 			vm.changeShowCreateMessageVariable = function() {
@@ -139,14 +139,8 @@ angular.module('appModule')
 				vm.showCreateMessage = true;
 			}
 			
-			vm.createMessage = function(caseId, message) {
-				messageService.create(caseId, message)
-				.then(function(response) {
-					
-				})
-			}
-			
 			vm.messages = [];
+			
 			
 			vm.showMessages = function(caseId) {
 				messageService.index(caseId)
@@ -156,6 +150,14 @@ angular.module('appModule')
 				})
 			}
 			
+			vm.createMessage = function(caseId, message) {
+				messageService.create(caseId, message)
+				.then(function(response) {
+					vm.messages.push(response.data);
+					console.log(response.data);
+					vm.showMessages(caseId);
+				})
+			}
 			
 		},
 		controllerAs : "vm"
