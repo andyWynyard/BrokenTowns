@@ -151,6 +151,7 @@ angular.module('appModule')
 			}
 			
 			vm.createMessage = function(caseId, message) {
+				message.createDate = new Date();
 				messageService.create(caseId, message)
 				.then(function(response) {
 					vm.messages.push(response.data);
