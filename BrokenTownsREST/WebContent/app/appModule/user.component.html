@@ -29,6 +29,7 @@
 	
 	<div class="well" ng-if="vm.selected">
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
+		<h3>{{vm.selected.municipality.name}}</h3>
 		<img src="{{vm.selected.photo.url}}"/>
 		<p>{{vm.selected.description}}</p>
 		<ul>

@@ -5,6 +5,7 @@
 			<form>
 				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
 				<input type="text" placeholder="Description" ng-model="newCase.description"><br>
+				<input type="file" name="file" ng-file="vm.file">
 				<select ng-model="newCase.severity">
 					<option value="" selected disabled hidden>Set Severity</option>
 					<option value="1">1</option>
@@ -13,11 +14,15 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</select><br>
+				<select ng-model="newCase.municipalityId">
+					<option value="" selected disabled hidden>Select Municipality</option>
+					<option ng-repeat="municipality in vm.municipalities" value="{{municipality.id}}">{{municipality.name}}</option>
+				</select><br>
 				<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
 					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker()" ng-model="newCase.latLong = vm.marker">
 					</ng-map>
 				</div>
-				<!-- <input type="text" placeholder="Picture URL" ng-model="newCase.photo"><br><br> -->
+				
 				<button type="btn" class="btn btn-info" ng-click="vm.create(newCase); vm.createNew = false; newCase = null;">Create</button>
 				<button type="btn" class="btn btn-danger" ng-click="vm.createNew = false; newCase = null;">Cancel</button>
 			</form>
@@ -49,6 +54,7 @@
 	<div class="well" ng-if="vm.selected">
 	<div class="col-md-6">
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
+		<h3>{{vm.selected.municipality.name}}</h3>
 		<img src="{{vm.selected.photo.url}}"/>
 		<p>{{vm.selected.description}}</p>
 		<ul>
