@@ -1,7 +1,7 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(caseItemService, authService, NgMap, $scope, municipalityService) {
+		controller   : function(messageService, caseItemService, authService, NgMap, $scope, municipalityService) {
 			var vm = this;
 			
 			vm.map = null;
@@ -126,6 +126,34 @@ angular.module('appModule')
 					vm.map.setCenter(location);
 			}
 
+			}
+			
+			//vm.createMessage(vm.selected.id, message);
+			vm.showCreateMessage = true;
+			
+			vm.changeShowCreateMessageVariable = function() {
+				vm.showCreateMessage = false;
+			}
+			
+			vm.changeVariableToTrue = function() {
+				vm.showCreateMessage = true;
+			}
+			
+			vm.createMessage = function(caseId, message) {
+				messageService.create(caseId, message)
+				.then(function(response) {
+					
+				})
+			}
+			
+			vm.messages = [];
+			
+			vm.showMessages = function(caseId) {
+				messageService.index(caseId)
+				.then(function(response) {
+				vm.messages = response.data
+				
+				})
 			}
 			
 			
