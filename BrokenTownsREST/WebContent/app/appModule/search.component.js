@@ -9,29 +9,28 @@ angular.module('appModule')
 			
 			vm.marker = new google.maps.LatLng(20.68177501,103.3514794);
 			
-			vm.municipality = null;
-			vm.caseItem = null;
+			vm.municipality = false;
+			vm.caseItem = true;
 			
-			vm.searchTab = function() {
+			vm.searchTab = function(word) {
 				if (vm.caseItem == null && vm.municipality == null) {
 					vm.caseItem = true;
 					vm.municipality = false;
 					return;
 				}
-				if (vm.caseItem == true) {
-					vm.caseItem = false;
-					vm.municipality = true;
-				} else {
+				if (word == 'case') {
 					vm.caseItem = true;
 					vm.municipality = false;
+					return;
+				}
+				if (word == 'munic') {
+					vm.municipality = true;
+					vm.caseItem = false;
+					return;
 				}
 			}
 			
-			vm.searchTab();
-			
 			vm.municipalities = null;
-			
-			
 
 			vm.file = {};
 
