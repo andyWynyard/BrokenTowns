@@ -1,5 +1,6 @@
 package data;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,18 +19,19 @@ import entities.User;
 
 @Transactional
 @Repository
-public class MessagePostDAOImpl implements MessagePostDAO {
+public class MessagePostDAOImpl implements MessagePostDAO{
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
-	public Set<MessagePost> index(int caseId) {
+	public List<MessagePost> index(int caseId) {
 		String query = "SELECT m FROM MessagePost m WHERE m.caseItem.id = :caseId";
 		List<MessagePost> allMessagesList = em.createQuery(query, MessagePost.class).setParameter("caseId",  caseId).getResultList();
-		Set<MessagePost> allMessagesSet = new LinkedHashSet<>(allMessagesList);
-
-		return allMessagesSet;
+		Collections.reverse(allMessagesList);
+		
+		
+		return allMessagesList;
 	}
 
 	@Override
@@ -44,6 +46,7 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 		try {
 			mp = mapper.readValue(jsonMessagePost, MessagePost.class);
 			mp.setCaseItem(em.find(CaseItem.class, caseId));
+			System.out.println(user);
 			mp.setUser(user);
 			
 			em.persist(mp);
@@ -84,5 +87,7 @@ public class MessagePostDAOImpl implements MessagePostDAO {
 			return false;
 		}
 	}
+	
+	
 
 }

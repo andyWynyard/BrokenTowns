@@ -1,5 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -27,7 +31,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(path = "caseItems/{caseId}/messages", method = RequestMethod.GET)
-	public Set<MessagePost> index(@PathVariable int caseId) {
+	public List<MessagePost> index(@PathVariable int caseId) {
 		return dao.index(caseId);
 	}
 	
