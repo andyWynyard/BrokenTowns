@@ -103,21 +103,22 @@
 				<tr ng-repeat="message in vm.messages">			
 					<td><div>{{message.user.firstName}} {{message.user.lastName}}:  {{message.text}}<br><br> </div></td>
 				</tr>	
+				
 			</table>
 			</div>
 			
-			
+				<table class="table table-striped">
+			<tr ng-repeat="message in vm.messages">
+				<td>{{message.text}}</td>
+			</tr>
+		</table>
 			
 			
 			
 			
 		</div>
 	
-		<table class="table table-striped">
-			<tr ng-repeat="message in vm.messages">
-				<td>{{message.text}}</td>
-			</tr>
-		</table>
+	
 		<!-- <div id="messageBoard">
 			<table>
 				<tr ng-repeat="message in vm.messages">			
