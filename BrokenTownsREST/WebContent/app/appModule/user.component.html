@@ -5,7 +5,7 @@
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
 	<div class="container">
-	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="row well">
+	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" ng-click="vm.showMessages(vm.selected.id)"class="row well">
 		<table class="table table-striped well">
 		  <thead>
 		  	<tr>
@@ -82,23 +82,32 @@
 			<div class="container well">
 				<!-- MESSAGE STUFF -->
 			
-				<table>
-				<tr>
-					<th><h1>Messages</h1></th>
-				</tr>
-				<tr>
-					<td>
+					<h1>Messages</h1>
+				
+					
 					<button type="btn" class="btn btn-info" ng-click="vm.changeShowCreateMessageVariable()" ng-show="vm.showCreateMessage">Create A Message</button>
-					</td>
-				</tr>
+				
+				
 					<!-- Message Board Below -->
-				 <tr ng-hide="vm.showCreateMessage">
-					<td><input type="text" placeholder="Message" ng-model="message.text"/></td>
-					<td><button type="btn" class="btn btn-info" ng-click="vm.createMessage(vm.selected.id, message);  vm.showMessages(vm.selected.id); vm.changeVariableToTrue(); message={}">Create</button></td>
-					<td><button type="btn" class="btn btn-danger" ng-click="vm.changeVariableToTrue(); message={}">Don't Create</button>
-				</tr>
-			</table>
+				 <div ng-hide="vm.showCreateMessage">
+				 <textarea class="form-control" placeholder="Message" id="exampleFormControlTextarea1" rows="3" ng-model="message.text"></textarea>
+				
+					<button type="btn" class="btn btn-info" ng-click="vm.createMessage(vm.selected.id, message);  vm.showMessages(vm.selected.id); vm.changeVariableToTrue(); message={}">Create</button>
+					<button type="btn" class="btn btn-danger" ng-click="vm.changeVariableToTrue(); message={}">Don't Create</button>
+				</div>
+			
 			<div id="messageBoard">
+			
+				<div class="panel panel-success" ng-repeat="message in vm.messages">
+  						<div class="panel-heading">{{message.user.firstName}} {{message.user.lastName}} at {{message.createDate}}</div>
+  						<div class="panel-body">{{message.text}}</div>
+				</div>
+				</div>
+			
+			
+			
+			
+		<!-- 	
 			<table>
 				<tr ng-repeat="message in vm.messages">			
 					<td><div>{{message.user.firstName}} {{message.user.lastName}}:  {{message.text}}<br><br> </div></td>
@@ -111,7 +120,7 @@
 			<tr ng-repeat="message in vm.messages">
 				<td>{{message.text}}</td>
 			</tr>
-		</table>
+		</table> -->
 			
 			
 			

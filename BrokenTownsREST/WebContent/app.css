@@ -39,7 +39,7 @@
 
 #messageBoard {
 	overflow-y: scroll;
- 	max-height: 60px; 
+ 	max-height: 500px; 
 	
 }
 
