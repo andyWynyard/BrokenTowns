@@ -1,7 +1,7 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(uploadService,messageService, caseItemService, authService, NgMap, $scope, municipalityService) {
+		controller   : function(uploadService, messageService, caseItemService, authService, NgMap, $scope, municipalityService) {
 
 			var vm = this;
 			

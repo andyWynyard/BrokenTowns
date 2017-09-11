@@ -3,7 +3,7 @@ angular.module('appModule').component(
 		{
 			templateUrl : 'app/appModule/user.component.html',
 			controller : function($location, authService, caseItemService,
-					userService, messageService, $scope, NgMap) {
+					userService, messageService, $scope, NgMap, municipalityService) {
 				var vm = this;
 
 				vm.map = null;
@@ -73,15 +73,28 @@ angular.module('appModule').component(
 				vm.showMessages();
 
 				vm.mapKey = "AIzaSyAM7sMRVwpJLTHY4KScoaPnpnjlZDRH3xg";
-
+				
+				vm.addMunicipalityToCaseItem = function(caseItem) {
+					municipalityService.index()
+						.then(function(res) {
+							res.data.forEach(function(val) {
+								val.caseItems.forEach(function(value) {
+									console.log("IN MUNICIPALITY TO CASE ITEM: " + value);
+									if (value.id == caseItem.id) {
+										console.log("FOUND IT");
+										vm.selected.municipality = value;
+										return;
+									}
+								})
+							})
+						})
+				}
+				
 				vm.applySelected = function(caseItem) {
 					vm.selected = caseItem;
-					for(var p in vm.selected) {
-						console.log("Stuff: " + p)
-					}
-					
-					console.log("vm.selected: " +
-							caseItem.id);
+
+					vm.addMunicipalityToCaseItem(caseItem); 
+
 					NgMap.getMap("map").then(
 							function(map) {
 								vm.map = map;
@@ -100,7 +113,8 @@ angular.module('appModule').component(
 					//					
 					// })
 					// .catch(console.error);
-					console.log("BANANANANAANANA")
+					console.log(vm.selected);
+					console.log("^^^^^^^vm.selected^^^^^^^");
 				}
 				
 //			Message Stuff Below
