@@ -3,7 +3,7 @@
    <div class="navbar-header">
      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
        <span class="icon-bar"></span>
-       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>	
        <span class="icon-bar"></span>
  
      </button>
@@ -11,15 +11,15 @@
    <div class="collapse navbar-collapse" id="myNavbar">
      <ul class="nav navbar-nav">
 		
-		<li><a href="#/">Home</a></li>
+	   <li><a href="#/" ng-hide="vm.checkLogin()">Home</a></li>
        <li ><a href="#/login" ng-hide="vm.checkLogin()">Login</a></li>
        <li><a href="#/register" ng-hide="vm.checkLogin()">Register</a></li>
        <li><a href="#/user" ng-show="vm.checkLogin()">Profile</a></li>
        <li><a href="#/search" ng-show="vm.checkLogin()">Search and Create!</a></li>
-     </ul>
-     <ul>
-    	 <li><a href="#/" class="pull-right" ng-show="vm.checkLogin()" ng-click="vm.logout()">Logout</a></li>
-     </ul>
+       </ul>
+       <ul class=" nav navbar-nav navbar-right"> 
+       <li><a href="#/" ng-show="vm.checkLogin()" ng-click="vm.logout()">Logout</a></li>
+       </ul>
    </div>
  </div>
 </nav> 
