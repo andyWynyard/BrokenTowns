@@ -79,10 +79,10 @@ angular.module('appModule').component(
 						.then(function(res) {
 							res.data.forEach(function(val) {
 								val.caseItems.forEach(function(value) {
-									console.log("IN MUNICIPALITY TO CASE ITEM: " + value);
+									console.log("IN MUNICIPALITY TO CASE ITEM: ");
 									if (value.id == caseItem.id) {
 										console.log("FOUND IT");
-										vm.selected.municipality = value;
+										vm.selected.municipality = val;
 										return;
 									}
 								})
