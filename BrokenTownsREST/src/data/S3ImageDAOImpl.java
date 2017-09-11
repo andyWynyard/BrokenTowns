@@ -34,11 +34,26 @@ public class S3ImageDAOImpl implements S3ImageDAO{
 			Photo image = null;
 			String s3Url = null;
 			PhotoDTO dto = null;
+			System.out.println("**************************************");
+			 System.out.println("**************************************");
+			 System.out.println("************json**********");
+			 System.out.println(dataJSON);
+			 System.out.println("**************************************");
+			 System.out.println("**************************************");
+			 System.out.println("**************************************");
 			
 			
 			try {
 		      // use service to upload image and get URL response
 					 s3Url = s3.uploadFileToS3(fileName, file);
+					 System.out.println("**************************************");
+					 System.out.println("**************************************");
+					 System.out.println("************S3URL**********");
+					 System.out.println(s3Url);
+					 System.out.println("**************************************");
+					 System.out.println("**************************************");
+					 System.out.println("**************************************");
+					 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,9 +65,17 @@ public class S3ImageDAOImpl implements S3ImageDAO{
 				dto = om.readValue(dataJSON, PhotoDTO.class);
 				dto.setS3Key(s3Url.substring(s3Url.lastIndexOf("/")+1));
 				dto.setUrl(s3Url);
-				image = generatePhoto(dto);	
-				
+				image = generatePhoto(dto);
+				 System.out.println("**************************************");
+				 System.out.println("**************************************");
+				 System.out.println("*************imgurl in photo***************");
+				System.out.println(image.getUrl());
+				 System.out.println("**************************************");
+				 System.out.println("**************************************");
+				 System.out.println("**************************************");
 				em.persist(image);
+				em.find(CaseItem.class,image.getCaseItem().getId())
+					.setPhotoUrl(s3Url);
 				em.flush();
 			} catch(Exception e) {
 				e.printStackTrace();

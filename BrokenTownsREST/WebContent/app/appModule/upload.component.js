@@ -1,6 +1,5 @@
 angular.module('appModule')
-.component('fileUpload', {
-	templateUrl : 'app/fileUpload.component.html',
+.component('upload', {
 	controller : function(uploadService) {
 		var vm = this;
 		console.log("loaded")

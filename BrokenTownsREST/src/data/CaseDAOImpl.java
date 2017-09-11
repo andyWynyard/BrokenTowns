@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.CaseItem;
 import entities.CaseItemDTO;
 import entities.Municipality;
+import entities.Photo;
 import entities.User;
 
 @Transactional
@@ -95,7 +96,7 @@ public class CaseDAOImpl implements CaseDAO {
 		ci.setLatitude(dto.getLatitude());
 		ci.setLongitude(dto.getLongitude());
 		ci.setMunicipality(em.find(Municipality.class, dto.getMunicipalityId()));
-		ci.setPhoto(dto.getPhoto());
+		//ci.setPhoto(em.find(Photo.class, dto.getPhotoURL()));
 		ci.setSeverity(dto.getSeverity());
 		ci.setTitle(dto.getTitle());
 		ci.setUser(em.find(User.class, dto.getUserId()));

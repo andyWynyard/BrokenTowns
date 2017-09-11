@@ -1,14 +1,30 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(caseItemService, authService, NgMap, $scope, municipalityService) {
+		controller   : function(uploadService,caseItemService, authService, NgMap, $scope, municipalityService) {
 			var vm = this;
 			
 			vm.map = null;
 			
-			vm.marker = null;
+			vm.marker = new google.maps.LatLng(20.68177501,103.3514794);
 			
 			vm.municipalities = null;
+			
+			
+
+			vm.file = {};
+
+			vm.upload = function(imgData) {
+				console.log(vm.file)
+				uploadService.upload(imgData, vm.file)
+				.then((r)=>{
+					console.log(r);
+					return r;
+				});
+			}
+			
+			
+			
 			
 			vm.loadAllMunicipalities = function() {
 				municipalityService.index()
@@ -44,7 +60,8 @@ angular.module('appModule')
 				console.log(newCase.longitude);
 				delete newCase.latLong;
 				caseItemService.create(newCase)
-					.then(function() {
+					.then(function(res) {
+						vm.upload({caseItemId : res.data.id, userId : userId})
 						vm.loadAllCases();
 					})
 			}

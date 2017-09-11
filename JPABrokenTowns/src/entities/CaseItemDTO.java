@@ -21,7 +21,7 @@ public class CaseItemDTO {
 
 	private int severity;
 
-	private Photo photo;
+	private String photoURL;
 	
 
 
@@ -97,12 +97,12 @@ public class CaseItemDTO {
 		this.severity = severity;
 	}
 
-	public Photo getPhoto() {
-		return photo;
+	public String getPhotoURL() {
+		return photoURL;
 	}
 
-	public void setPhoto(Photo photo) {
-		this.photo = photo;
+	public void setPhotoURL(String photoURL) {
+		this.photoURL = photoURL;
 	}
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
