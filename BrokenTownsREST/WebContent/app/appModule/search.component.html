@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="well" ng-hide="vm.selected || vm.selectedMunicipality">
 		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true; vm.setLocation(); vm.getLocation(); ">Create New Case</button>
-		<div ng-show="vm.createNew">
-			<form>
+		<div ng-if="vm.createNew" ng-init="newCase = {};">
+			<form enctype="multipart/form-data">
 				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
 				<input type="text" placeholder="Description" ng-model="newCase.description"><br>
 				<input type="file" name="file" ng-file="vm.file">
@@ -18,9 +18,11 @@
 					<option value="" selected disabled hidden>Select Municipality</option>
 					<option ng-repeat="municipality in vm.municipalities" value="{{municipality.id}}">{{municipality.name}}</option>
 				</select><br>
+				{{newCase}}
 				<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
 					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker()" ng-model="newCase.latLong = vm.marker">
-					</ng-map>
+				</ng-map>
+				
 				</div>
 				
 				<button type="btn" class="btn btn-info" ng-click="vm.create(newCase); vm.createNew = false; newCase = null;">Create</button>
@@ -41,7 +43,6 @@
   </uib-tabset>
 	</div>
 	
-	
 	<div class="well" ng-hide="vm.selected" ng-show="vm.searchResults.length > 0 && vm.caseItem == true;">
 		<table class="table table-striped">
 			<thead>
@@ -51,7 +52,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="result in vm.searchResults | filter:vm.search.name" ng-click="vm.selected=result; vm.applySelected(result);">
+				<tr ng-repeat="result in vm.searchResults | filter:vm.search.name" ng-click="vm.selected=result; vm.showMessages(vm.selected.id); vm.applySelected(result);">
+			<!-- added vm.showMessages passing it the vm.selected.id here -->
 					<td>{{result.title}}</td>
 					<td>{{result.severity}}</td>
 				</tr>
@@ -75,6 +77,8 @@
 		</table>
 	</div>
 	<div class="well" ng-if="vm.selected">
+	<div class="col-md-6">
+	
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
 		<h3>{{vm.selected.municipality.name}}</h3>
 		<img src="{{vm.selected.photo.url}}"/>
@@ -83,17 +87,39 @@
 			<li>Lat: {{vm.selected.latitude}}</li>
 			<li>Long: {{vm.selected.longitude}}</li>
 		</ul>
+		</div>
+		<div class="col-md-6">		
+			<table>
+				<tr>
+					<th><h1>Messages</h1></th>
+				</tr>
+				<tr>
+					<td>
+					<button type="btn" class="btn btn-info" ng-click="vm.changeShowCreateMessageVariable()" ng-show="vm.showCreateMessage">Create A Message</button>
+					</td>
+				</tr>
+					<!-- Message Board Below -->
+				 <tr ng-hide="vm.showCreateMessage">
+					<td><input type="text" placeholder="Message" ng-model="message.text"/></td>
+					<td><button type="btn" class="btn btn-info" ng-click="vm.createMessage(vm.selected.id, message);  vm.showMessages(vm.selected.id); vm.changeVariableToTrue(); message={}">Create</button></td>
+					<td><button type="btn" class="btn btn-danger" ng-click="vm.changeVariableToTrue(); message={}">Don't Create</button>
+				</tr>
+			</table>
+			<div id="messageBoard">
+			<table>
+				<tr ng-repeat="message in vm.messages">			
+					<td><div>{{message.user.firstName}} {{message.user.lastName}}:  {{message.text}}<br><br> </div></td>
+				</tr>	
+			</table>
+			</div>
+			<!--End of Message Board -->
+		</div>
 		<!-- MAPS STUFF -->
 		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
 			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9">
 				<marker position="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]"></marker>
 			</ng-map>
 		</div>
-		<table class="table table-striped">
-			<tr ng-repeat="message in vm.messages">
-				<td>{{message.text}}</td>
-			</tr>
-		</table>
 		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
 	</div>
 	<div class="well" ng-show="vm.selectedMunicipality">

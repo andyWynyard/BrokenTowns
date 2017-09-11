@@ -115,12 +115,12 @@ public class EntityTests {
 		assertNotEquals("kangaroo", caseItem.getUser().getLastName());
 		assertEquals("Dude", caseItem.getUser().getLastName());
 	}
-	
-	@Test
-	public void test_case_item_for_photo() {
-		assertNotEquals("pretty", caseItem.getPhoto().getUrl());
-		assertEquals("apicture@picture.com", caseItem.getPhoto().getUrl());
-	}
+//	
+//	@Test
+//	public void test_case_item_for_photo() {
+//		assertNotEquals("pretty", caseItem.getPhoto().getUrl());
+//		assertEquals("apicture@picture.com", caseItem.getPhoto().getUrl());
+//	}
 	
 	@Test
 	public void test_case_item_for_municipality() {

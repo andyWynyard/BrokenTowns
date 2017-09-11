@@ -1,12 +1,13 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(caseItemService, authService, NgMap, $scope, municipalityService) {
+		controller   : function(uploadService,messageService, caseItemService, authService, NgMap, $scope, municipalityService) {
+
 			var vm = this;
 			
 			vm.map = null;
 			
-			vm.marker = null;
+			vm.marker = new google.maps.LatLng(20.68177501,103.3514794);
 			
 			vm.municipality = null;
 			vm.caseItem = null;
@@ -29,6 +30,22 @@ angular.module('appModule')
 			vm.searchTab();
 			
 			vm.municipalities = null;
+			
+			
+
+			vm.file = {};
+
+			vm.upload = function(imgData) {
+				console.log(vm.file)
+				uploadService.upload(imgData, vm.file)
+				.then((r)=>{
+					console.log(r);
+					return r;
+				});
+			}
+			
+			
+			
 			
 			vm.loadAllMunicipalities = function() {
 				municipalityService.index()
@@ -74,7 +91,8 @@ angular.module('appModule')
 				console.log(newCase.longitude);
 				delete newCase.latLong;
 				caseItemService.create(newCase)
-					.then(function() {
+					.then(function(res) {
+						vm.upload({caseItemId : res.data.id, userId : userId})
 						vm.loadAllCases();
 					})
 			}
@@ -158,6 +176,37 @@ angular.module('appModule')
 
 			}
 			
+//			message stuff below
+			vm.showCreateMessage = true;
+			
+			vm.changeShowCreateMessageVariable = function() {
+				vm.showCreateMessage = false;
+			}
+			
+			vm.changeVariableToTrue = function() {
+				vm.showCreateMessage = true;
+			}
+			
+			vm.messages = [];
+			
+			
+			vm.showMessages = function(caseId) {
+				messageService.index(caseId)
+				.then(function(response) {
+				vm.messages = response.data
+				
+				})
+			}
+			
+			vm.createMessage = function(caseId, message) {
+				message.createDate = new Date();
+				messageService.create(caseId, message)
+				.then(function(response) {
+					vm.messages.push(response.data);
+					console.log(response.data);
+					vm.showMessages(caseId);
+				})
+			}
 			
 		},
 		controllerAs : "vm"

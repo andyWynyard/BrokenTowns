@@ -10,14 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "case_item")
@@ -53,10 +51,8 @@ public class CaseItem {
 	@Max(5)
 	private int severity;
 
-	@OneToOne(mappedBy="caseItem")
-	@JoinColumn(name = "photo_url")
-	@JsonManagedReference(value="photoToCaseItem")
-	private Photo photo;
+	@Column(name="photo_url")
+	private String photoUrl;
 
 	// Note, 'Message' could not be used as a class name due to 'Message' being a
 	// deprecated Java Keyword, so that's why the class is called 'MessagePost'
@@ -136,12 +132,16 @@ public class CaseItem {
 		this.severity = severity;
 	}
 
-	public Photo getPhoto() {
-		return photo;
+	public String getPhotoUrl() {
+		return photoUrl;
 	}
 
-	public void setPhoto(Photo photo) {
-		this.photo = photo;
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public List<MessagePost> getMessagePosts() {

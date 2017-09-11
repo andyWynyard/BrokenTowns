@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "message")
@@ -24,9 +25,10 @@ public class MessagePost {
 	@JoinColumn(name = "case_item_id")
 	private CaseItem caseItem;
 
+	
+	//removed @JsonBackReference from user as it is necessary needed to display the user name that is posting the message
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
 	private User user;
 
 	private String text;

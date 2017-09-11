@@ -5,18 +5,25 @@ angular.module('authModule')
     var saveToken = function(user) {
     		$cookies.put('uid', user.id)
     		$cookies.put('email', user.email)
+    		$cookies.put('firstName', user.firstName)
+    		$cookies.put('lastName', user.lastName)
     }
 
     service.getToken = function() {
     		return {
     			id : $cookies.get("uid"),
-    			email : $cookies.get("email")
+    			email : $cookies.get("email"),
+    			firstName : $cookies.get("firstName"),
+    			lastName : $cookies.get("lastName")
+    			
     		}
     }
 
     var removeToken = function() {
     		$cookies.remove('uid');
 		$cookies.remove('email');
+		$cookies.remove('firstName')
+		$cookies.remove('lastName')
     }
 
     service.login = function(user) {
