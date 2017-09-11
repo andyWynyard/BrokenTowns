@@ -1,6 +1,6 @@
 <div class="container">
 <!-- <ng-map center="[38,-77]" zoom="9"></ng-map> -->
-	<div class="well">
+	<div class="jumbotron">
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
@@ -27,18 +27,20 @@
 		</table>
 	</div>
 	
-	<div class="well" ng-if="vm.selected">
-		<div class="row col-md-6">
+	<div class="container" ng-if="vm.selected">
+	<div class="row">
+		<div class="col-md-6">
 		<h2>{{vm.selected.title}} <span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
 		<h3>{{vm.selected.municipality.name}}</h3>
-		<img src="{{vm.selected.photoUrl}}"/>
+		
 		<p>{{vm.selected.description}}</p>
+		<img src="{{vm.selected.photoUrl}}" class="img-thumbnail"/>
 		<ul>
-			<li>Lat: {{vm.selected.latitude}}</li>
-			<li>Long: {{vm.selected.longitude}}</li>
+			<li>Latitude: {{vm.selected.latitude}}</li>
+			<li>Longitude: {{vm.selected.longitude}}</li>
 		</ul>
 		</div>
-		<div class="row col-md-6">
+		<div class="col-md-6">
 			<table>
 				<tr>
 					<th><h1>Messages</h1></th>
@@ -95,4 +97,6 @@
 		<!-- <ul>
 			<li ng-repeat="messages in vm.messages">{{messages.text}}</li>
 		</ul> -->
+		
+		</div>
 </div>
