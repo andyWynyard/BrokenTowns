@@ -76,7 +76,12 @@ angular.module('appModule').component(
 
 				vm.applySelected = function(caseItem) {
 					vm.selected = caseItem;
-					console.log("vm.selected: " + vm.selected.photoURL);
+					for(var p in vm.selected) {
+						console.log("Stuff: " + p)
+					}
+					
+					console.log("vm.selected: " +
+							caseItem.id);
 					NgMap.getMap("map").then(
 							function(map) {
 								vm.map = map;

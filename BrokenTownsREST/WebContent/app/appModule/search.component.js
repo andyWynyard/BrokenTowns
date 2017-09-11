@@ -116,7 +116,8 @@ angular.module('appModule')
 			vm.mapKey = "AIzaSyAM7sMRVwpJLTHY4KScoaPnpnjlZDRH3xg";
 
 			vm.applySelected = function(caseItem) {
-				console.log(vm.selected);
+				
+			
 				vm.selected = caseItem;
 				NgMap.getMap("map").then(
 						function(map) {
