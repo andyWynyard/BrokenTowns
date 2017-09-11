@@ -123,7 +123,7 @@ angular.module('appModule').component(
 					
 					authService.register(user)
 						.then(function(res) {
-							$location.path('/login');
+							$location.path('/user');
 						})
 						.catch(console.error)
 				}
