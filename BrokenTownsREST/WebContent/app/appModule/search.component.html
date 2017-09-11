@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="well" ng-hide="vm.selected">
+	<div class="well" ng-hide="vm.selected || vm.selectedMunicipality">
 		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true; vm.setLocation(); vm.getLocation(); ">Create New Case</button>
 		<div ng-show="vm.createNew">
 			<form>
@@ -28,24 +28,48 @@
 			</form>
 		</div>
 	</div>
-	<div class="well" ng-hide="vm.selected">
-		<h3>Search it up!</h3>
-			<input class="searchbar" type="search" placeholder="Search for Cases" ng-model="search">
+	<div class="well" ng-hide="vm.selected || vm.selectedMunicipality">
+	  <uib-tabset active="activeJustified" justified="true">
+    	  <uib-tab index="0" ng-click="vm.searchTab();" heading="Search By Case">
+    	  	<h3>Search By Case Item</h3>
+		<input class="searchbar" type="search" placeholder="Search for Cases" ng-model="vm.search.name">
+    	  </uib-tab>
+    	  <uib-tab index="1" ng-click="vm.searchTab();" heading="Search By Municipality">
+    	  	<h3>Search By Municipality</h3>
+		<input class="searchbar" type="search" placeholder="Search for Municipalities" ng-model="vm.search.name">
+    	  </uib-tab>
+  </uib-tabset>
 	</div>
-	<div class="well" ng-hide="vm.selected" ng-show="vm.searchResults.length > 0">
+	
+	
+	<div class="well" ng-hide="vm.selected" ng-show="vm.searchResults.length > 0 && vm.caseItem == true;">
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<td><strong>Name</strong></td>
-					<td><strong>Municipality</strong></td>
 					<td><strong>Severity</strong></td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="result in vm.searchResults | filter:search" ng-click="vm.selected=result; vm.applySelected(result);">
+				<tr ng-repeat="result in vm.searchResults | filter:vm.search.name" ng-click="vm.selected=result; vm.applySelected(result);">
 					<td>{{result.title}}</td>
-					<td>{{result.municipality.name}}</td>
 					<td>{{result.severity}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="well" ng-hide="vm.selectedMunicipality" ng-show="vm.municipalitySearchResults.length > 0 && vm.municipality == true;">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><strong>Name</strong></td>
+					<td><strong>State</strong></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="result in vm.municipalitySearchResults | filter:vm.search.name" ng-click="vm.selectedMunicipality=result; vm.getCasesByMunicipality();">
+					<td>{{result.name}}</td>
+					<td>{{result.state}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -71,5 +95,26 @@
 			</tr>
 		</table>
 		<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
+	</div>
+	<div class="well" ng-show="vm.selectedMunicipality">
+		<h2>{{vm.selectedMunicipality.name}}, {{vm.selectedMunicipality.state}}</h2>
+		<div class="well">
+			<h3>Remaining Projects in {{vm.selectedMunicipality.name}}</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Severity</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="caseItem in vm.selectedMunicipality.caseItems;">
+						<td>{{caseItem.title}}</td>
+						<td>{{caseItem.severity}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button type="btn" class="btn btn-info" ng-click="vm.selectedMunicipality = null; vm.casesByMunicipality = [];">Back</button>
 	</div>
 </div>

@@ -8,6 +8,26 @@ angular.module('appModule')
 			
 			vm.marker = null;
 			
+			vm.municipality = null;
+			vm.caseItem = null;
+			
+			vm.searchTab = function() {
+				if (vm.caseItem == null && vm.municipality == null) {
+					vm.caseItem = true;
+					vm.municipality = false;
+					return;
+				}
+				if (vm.caseItem == true) {
+					vm.caseItem = false;
+					vm.municipality = true;
+				} else {
+					vm.caseItem = true;
+					vm.municipality = false;
+				}
+			}
+			
+			vm.searchTab();
+			
 			vm.municipalities = null;
 			
 			vm.loadAllMunicipalities = function() {
@@ -23,16 +43,26 @@ angular.module('appModule')
 			var userId = authService.getToken().id;
 			
 			vm.searchResults = [];
+			vm.municipalitySearchResults = [];
 			
-			vm.loadAllCases = function() {
-				caseItemService.index()
+			vm.loadAllMunicipalities = function() {
+				municipalityService.index()
 					.then(function(res) {
-						vm.searchResults = res.data;
+						vm.municipalitySearchResults = res.data;
 					});
 			}
+			vm.loadAllCases = function() {
+				caseItemService.index()
+				.then(function(res) {
+					vm.searchResults = res.data;
+				});
+			}
 			vm.loadAllCases();
+			vm.loadAllMunicipalities();
 			
 			vm.selected = null;
+			
+			vm.selectedMunicipality = null;
 			
 			vm.create = function(newCase) {
 				newCase.userId = userId;
