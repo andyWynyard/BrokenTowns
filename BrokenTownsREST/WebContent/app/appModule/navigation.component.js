@@ -1,6 +1,6 @@
 angular.module('appModule').component('navigation', {
 	templateUrl : 'app/appModule/navigation.component.html',
-	controller : function(authService) {
+	controller : function(authService, $location) {
 		var vm = this;
 		
 		console.log("before check login: " + vm.showLogin);

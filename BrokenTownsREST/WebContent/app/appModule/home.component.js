@@ -2,7 +2,7 @@ angular.module('appModule').component(
 		'home',
 		{
 			templateUrl : 'app/appModule/home.component.html',
-			controller : function($interval, authService) {
+			controller : function($interval, $location, authService) {
 				var vm = this;
 
 				vm.advertisingArray = [ "Report It!", "Get It Fixed!",
@@ -32,16 +32,28 @@ angular.module('appModule').component(
 					}
 				},
 
-//				The below sets the timeout, the first number is the interval, the second number is how many times it fires
+// The below sets the timeout, the first number is the interval, the second
+// number is how many times it fires
 				1200, 70
 
 				);
 				
-//				Login Stuff
-				vm.errors = [];
+				// Login Stuff
+				vm.loginErrors = [];
+				
+				vm.showLoginForm = true;
+				
+				vm.changeLoginFormToFalse = function () {
+					vm.showLoginForm = false;
+				}
+				
+				vm.changeLoginFormToTrue = function() {
+					vm.showLoginForm = true;
+				}
+				
 				
 				vm.login = function(user) {
-					vm.errors = [];
+					vm.loginErrors = [];
 				
 					authService.login(user)
 						.then(function(res) {
@@ -55,8 +67,8 @@ angular.module('appModule').component(
 				
 						})
 						.catch();
-						vm.errors.push("Your email and/or password is incorrect. Please Try Again");
-						return vm.errors;
+					     vm.loginErrors.push("Your email and/or password is incorrect. Please Try Again");
+						return vm.loginErrors;
 				}
 				
 				vm.invalid = function(user) {
@@ -65,8 +77,21 @@ angular.module('appModule').component(
 					return false;
 				}
 				
-//				Registration Stuff
+// Registration Stuff
+				
+				vm.showRegistrationForm = true;
+				
+				vm.changeRegistrationFormToFalse = function () {
+					vm.showRegistrationForm = false;
+				}
+				
+				vm.changeRegistrationFormToTrue = function() {
+					vm.showRegistrationForm = true;
+				}
+				
+				
 				vm.register = function(user) {
+					
 					vm.errors = [];
 					
 					var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -98,11 +123,16 @@ angular.module('appModule').component(
 					
 					authService.register(user)
 						.then(function(res) {
-							$location.path('/login');
+							$location.path('/user');
 						})
 						.catch(console.error)
 				}
-
+				
+				vm.cancelButtonPressed = function() {
+					vm.errors = null;
+				}
+				
+				console.log("home component");
 			},
 			controllerAs : 'vm'
 		})
