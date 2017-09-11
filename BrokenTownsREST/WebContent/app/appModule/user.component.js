@@ -5,12 +5,6 @@ angular.module('appModule').component(
 			controller : function($location, authService, caseItemService,
 					userService, messageService, $scope, NgMap) {
 				var vm = this;
-				
-				vm.showCreateTable = true;
-				
-				vm.flipVariable = function() {
-					vm.showCreateTable = false;
-				}
 
 				vm.map = null;
 
@@ -102,6 +96,39 @@ angular.module('appModule').component(
 					// })
 					// .catch(console.error);
 					console.log("BANANANANAANANA")
+				}
+				
+//			Message Stuff Below
+				
+				vm.showCreateMessage = true;
+				
+				vm.changeShowCreateMessageVariable = function() {
+					vm.showCreateMessage = false;
+				}
+				
+				vm.changeVariableToTrue = function() {
+					vm.showCreateMessage = true;
+				}
+				
+				vm.messages = [];
+				
+				
+				vm.showMessages = function(caseId) {
+					messageService.index(caseId)
+					.then(function(response) {
+					vm.messages = response.data
+					
+					})
+				}
+				
+				vm.createMessage = function(caseId, message) {
+					message.createDate = new Date();
+					messageService.create(caseId, message)
+					.then(function(response) {
+						vm.messages.push(response.data);
+						console.log(response.data);
+						vm.showMessages(caseId);
+					})
 				}
 
 			},

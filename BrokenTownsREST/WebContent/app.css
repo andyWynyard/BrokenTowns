@@ -34,3 +34,13 @@
 	margin-left: 60%;
 }
 
+#messageBoard {
+	overflow-y: scroll;
+ 	max-height: 60px; 
+	
+}
+
+#userMessage {
+	min-height: 490px;
+}
+

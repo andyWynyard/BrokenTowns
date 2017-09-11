@@ -1,6 +1,12 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.MessagePostDAO;
 import entities.MessagePost;
+import entities.User;
 
 @RestController
 public class MessageController {
@@ -24,7 +31,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(path = "caseItems/{caseId}/messages", method = RequestMethod.GET)
-	public Set<MessagePost> index(@PathVariable int caseId) {
+	public List<MessagePost> index(@PathVariable int caseId) {
 		return dao.index(caseId);
 	}
 	
@@ -34,8 +41,9 @@ public class MessageController {
 	}
 	
 	@RequestMapping(path = "caseItems/{caseId}/messages", method = RequestMethod.POST)
-	public MessagePost create(@PathVariable int caseId, @RequestBody String jsonMessagePost) {
-		return dao.create(caseId, jsonMessagePost);
+	public MessagePost create(HttpSession session, @PathVariable int caseId, @RequestBody String jsonMessagePost) {
+		User user = (User) session.getAttribute("user");
+		return dao.create(caseId, jsonMessagePost, user );
 	}
 	
 	@RequestMapping(path = "caseItems/{caseId}/messages/{id}", method = RequestMethod.PUT)

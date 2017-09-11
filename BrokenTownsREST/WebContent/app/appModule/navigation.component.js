@@ -13,6 +13,14 @@ angular.module('appModule').component('navigation', {
 			return false;
 		}
 		
+		vm.logout = function() {
+			authService.logout()
+				.then(function(res){
+					$location.path("/")
+				})
+				.catch(console.error)
+		}
+		
 		console.log("After checkLogin: " +vm.showLogin);
 
 	},

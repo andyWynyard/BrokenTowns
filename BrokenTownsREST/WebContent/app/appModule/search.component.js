@@ -1,7 +1,8 @@
 angular.module('appModule')
 	.component('search', {
 		templateUrl  :  "app/appModule/search.component.html",
-		controller   : function(uploadService,caseItemService, authService, NgMap, $scope, municipalityService) {
+		controller   : function(uploadService,messageService, caseItemService, authService, NgMap, $scope, municipalityService) {
+
 			var vm = this;
 			
 			vm.map = null;
@@ -145,6 +146,37 @@ angular.module('appModule')
 
 			}
 			
+//			message stuff below
+			vm.showCreateMessage = true;
+			
+			vm.changeShowCreateMessageVariable = function() {
+				vm.showCreateMessage = false;
+			}
+			
+			vm.changeVariableToTrue = function() {
+				vm.showCreateMessage = true;
+			}
+			
+			vm.messages = [];
+			
+			
+			vm.showMessages = function(caseId) {
+				messageService.index(caseId)
+				.then(function(response) {
+				vm.messages = response.data
+				
+				})
+			}
+			
+			vm.createMessage = function(caseId, message) {
+				message.createDate = new Date();
+				messageService.create(caseId, message)
+				.then(function(response) {
+					vm.messages.push(response.data);
+					console.log(response.data);
+					vm.showMessages(caseId);
+				})
+			}
 			
 		},
 		controllerAs : "vm"
