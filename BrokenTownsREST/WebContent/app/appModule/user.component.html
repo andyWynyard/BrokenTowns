@@ -4,7 +4,8 @@
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
-	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="well">
+	<div class="container">
+	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" class="row well">
 		<table class="table table-striped well">
 		  <thead>
 		  	<tr>
@@ -26,10 +27,12 @@
 		
 		</table>
 	</div>
+	</div>
 	
-	<div class="container" ng-if="vm.selected">
+	<div ng-if="vm.selected">
+	<div class="container well" >
 	<div class="row">
-		<div class="col-md-6 well">
+		<div class="col-md-6">
 		<h1><strong>Issue: </strong>{{vm.selected.title}} </h1>
 
 		<h2><strong>Severity: </strong><span class="label label-success" ng-class="vm.setSeverityColor()">{{vm.selected.severity}}</span></h2>
@@ -37,15 +40,49 @@
 		<h3><strong>Municipality: </strong>{{vm.selected.municipality.name}}</h3>
 		
 		<p><strong>Description: </strong>{{vm.selected.description}}</p>
-			<ul>
+			
+		
+	
+		</div>
+		<div class="col-md-6">
+		
+		
+		<h2>Specific Location Data</h2>
+		
+		<ul>
 			<li><strong>Latitude: </strong>{{vm.selected.latitude}}</li>
 			<li><strong>Longitude: </strong>{{vm.selected.longitude}}</li>
 		</ul>
-		<img src="{{vm.selected.photoUrl}}" class="img-thumbnail"/>
-	
+		
+		
+			</div>
+			</div>
+			
+			<div class="row">
+			<div class="col-md-6">
+			<img src="{{vm.selected.photoUrl}}" class="img-thumbnail"/>
+			
+			</div>
+			<div class="col-md-6">
+						<!-- Maps Stuff -->
+		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" id="userMessage">
+		
+		
+			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9">
+				<marker position="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]"></marker>
+			</ng-map>
 		</div>
-		<div class="col-md-6 well">
-			<table>
+			
+			
+			</div>
+			</div>
+				<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
+			</div>
+			
+			<div class="container well">
+				<!-- MESSAGE STUFF -->
+			
+				<table>
 				<tr>
 					<th><h1>Messages</h1></th>
 				</tr>
@@ -69,14 +106,13 @@
 			</table>
 			</div>
 			
-			</div>
+			
+			
+			
+			
+			
 		</div>
-		<!-- Maps Stuff -->
-		<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="row well" id="userMessage">
-			<ng-map id="map" center="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]" zoom="9">
-				<marker position="[{{vm.selected.latitude}}, {{vm.selected.longitude}}]"></marker>
-			</ng-map>
-		</div>
+	
 		<table class="table table-striped">
 			<tr ng-repeat="message in vm.messages">
 				<td>{{message.text}}</td>
@@ -90,9 +126,9 @@
 			</table>
 			</div> -->
 
-	<button type="btn" class="btn btn-info" ng-click="vm.selected = null;">Back</button>
-		</div>
-	</div>
+
+		
+	
 	
 	<!-- Maps stuff -->
 	
@@ -101,6 +137,6 @@
 		<!-- <ul>
 			<li ng-repeat="messages in vm.messages">{{messages.text}}</li>
 		</ul> -->
-		
 		</div>
+		
 </div>

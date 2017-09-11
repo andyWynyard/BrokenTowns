@@ -17,6 +17,9 @@
 
 	background-color : green;
 }
+#map {
+	max-height: 750px;
+}
 
 .logout {
 	background-color: transparent;

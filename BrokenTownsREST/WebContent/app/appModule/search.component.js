@@ -114,11 +114,30 @@ angular.module('appModule')
 			}
 			
 			vm.mapKey = "AIzaSyAM7sMRVwpJLTHY4KScoaPnpnjlZDRH3xg";
+			
+			vm.addMunicipalityToCaseItem = function(caseItem) {
+				municipalityService.index()
+					.then(function(res) {
+						res.data.forEach(function(val) {
+							val.caseItems.forEach(function(value) {
+								console.log("IN MUNICIPALITY TO CASE ITEM: ");
+								if (value.id == caseItem.id) {
+									console.log("FOUND IT" + vm.selected.municipality);
+									vm.selected.municipality = val;
+									return;
+								}
+							})
+						})
+					})
+			}
+			
+			
 
 			vm.applySelected = function(caseItem) {
 				
 			
 				vm.selected = caseItem;
+				vm.addMunicipalityToCaseItem(caseItem);
 				NgMap.getMap("map").then(
 						function(map) {
 							vm.map = map;
