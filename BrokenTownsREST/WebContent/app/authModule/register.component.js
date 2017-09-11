@@ -13,7 +13,7 @@ angular.module('authModule')
 		}
 		
 		vm.register = function(user) {
-			vm.errors = [];
+			vm.registrationErrors = [];
 			
 			var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 			
