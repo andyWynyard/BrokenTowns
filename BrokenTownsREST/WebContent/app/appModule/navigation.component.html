@@ -10,11 +10,11 @@
    </div>
    <div class="collapse navbar-collapse" id="myNavbar">
      <ul class="nav navbar-nav">
-		
+	   <li class="navbar-brand" >Broken Towns</li>
 	   <li><a href="#/" ng-hide="vm.checkLogin()">Home</a></li>
-       <li ><a href="#/login" ng-hide="vm.checkLogin()">Login</a></li>
-       <li><a href="#/register" ng-hide="vm.checkLogin()">Register</a></li>
-       <li><a href="#/user" ng-show="vm.checkLogin()">Profile</a></li>
+       <!-- <li ><a href="#/login" ng-hide="vm.checkLogin()">Login</a></li> -->
+       <!-- <li><a href="#/register" ng-hide="vm.checkLogin()">Register</a></li> -->
+       <li><a href="#/user" ng-show="vm.checkLogin()">{{vm.userFirstName}}</a></li>
        <li><a href="#/search" ng-show="vm.checkLogin()">Search and Create!</a></li>
        </ul>
        <ul class=" nav navbar-nav navbar-right"> 

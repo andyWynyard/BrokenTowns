@@ -1,47 +1,47 @@
 <!-- Title -->
-<div class="row" ng-hide="vm.checkLogin()">
+<!-- <div class="row" ng-hide="vm.checkLogin()">
 	<div class="col-md-12 text-center">
 		<h1>BROKEN TOWNS</h1>
 	</div>
-</div>
+</div> -->
 
+<!-- Modal -->
+<div class="row" ng-hide="vm.checkLogin()">	
+	<div class="modal show">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">      
 
-<div class="row" ng-hide="vm.checkLogin()">
-	<!-- Registration Stuff -->
-	<div class="col-md-6 text-center">
-		<button type="submit" ng-click="vm.changeRegistrationFormToFalse()"
-			ng-show="vm.showRegistrationForm">Register</button>
-
-		<form ng-hide="vm.showRegistrationForm">
+        <h1 class="modal-title text-center">Broken Towns</h1>
+         </div>
+         <div class="modal-body">
+          <!-- Registration -->        
+          <form>
 			First Name<input type="text" ng-model="user.firstName" required /><br>
 			Last Name<input type="text" ng-model="user.lastName" required /><br>
 			Email<input type="text" ng-model="user.email" required /><br>
 			Password<input type="password" ng-model="user.password" required /><br>
 			Password Confirm<input type="password" ng-model="user.confirm" required /><br> <input type="submit" value="Register"ng-click="vm.register(user)" /> 
-			<input type="submit" value="Cancel"ng-click="user = {}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed()">
+			<input type="submit" value="Cancel"ng-click="user = {}; vm.cancelButtonPressed()">
 		</form>
-
-		<div>
-			<ul>
-				<li ng-repeat="error in vm.errors" ng-show="vm.errors.length > 0">{{error}}</li>
-			</ul>
-		</div>
-
-	</div>
-	
-	<!-- Login Stuff  -->
-	<div class="col-md-6 text-center">
-		<button type="submit" ng-show="vm.showLoginForm" ng-click="vm.changeLoginFormToFalse()" >Login</button>
-
-		<form ng-hide="vm.showLoginForm">
+          
+      <!-- Login  -->   
+      
+      <form>
 			Email<input type="email" ng-model="user1.email" required /> 
 			Password<input type="password" ng-model="user1.password" required /> 
 			<input type="submit" value="Login" ng-click="vm.login(user1); u1ser = {}" />
-			<input type="submit" value="Cancel" ng-click="user1 = {}; vm.changeLoginFormToTrue()">
+			<input type="submit" value="Cancel" ng-click="user1 = {}">
 			
 			<h1 ng-show="vm.errors.length > 0">{{vm.loginErrors[0]}}</h1>
 		</form>
-
-	</div>
+       
+      </div>
+      <div class="modal-footer">
+      </div>
+      </div><!-- /.modal-content -->
+    </div>
 </div>
+</div>
+
 
