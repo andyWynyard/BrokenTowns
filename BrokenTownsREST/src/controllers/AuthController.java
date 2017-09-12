@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import data.AuthDAO;
 import entities.User;
+import entities.UserDTO;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,8 +23,9 @@ public class AuthController {
 	private AuthDAO authDAO;
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public User register(HttpSession session, HttpServletResponse res,  @RequestBody User user) {
-		User registeredUser = authDAO.register(user);
+	public User register(HttpSession session, HttpServletResponse res,  @RequestBody String jsonUser) {
+	
+		User registeredUser = authDAO.register(jsonUser);
 		
 		if(registeredUser == null) {
 			res.setStatus(422);

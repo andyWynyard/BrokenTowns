@@ -2,7 +2,7 @@ angular.module('appModule').component(
 		'home',
 		{
 			templateUrl : 'app/appModule/home.component.html',
-			controller : function($interval, $location, authService) {
+			controller : function($interval, $location, authService, municipalityService) {
 				var vm = this;
 
 				vm.advertisingArray = [ "Report It!", "Get It Fixed!",
@@ -89,44 +89,58 @@ angular.module('appModule').component(
 					vm.showRegistrationForm = true;
 				}
 				
-				
-				vm.register = function(user) {
-					
-					vm.errors = [];
-					
-					var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-					
-					if(!user.firstName) {
-						vm.errors.push("You must have a first name");
-					}
-					
-					if(!user.lastName) {
-						vm.errors.push("You must have a last name");
-					}
-					
-					
-					if (!re.test(user.email)) {
-						vm.errors.push("Your email is not an email");
-					}
-					if (!user.password || user.password.length < 6) {
-						vm.errors.push("You must include a password, of at least 6 characters")
-					}
-					if (user.password !== user.confirm) {
-						vm.errors.push("Your passwords do not match");
-					}
-
-					if (vm.errors.length > 0) {
-						return;
-					}
-					
-					delete user.confirm;
-					
-					authService.register(user)
+				vm.registerMunicAndCreateUser = function(municipality, user) {
+					municipalityService.create(municipality)
 						.then(function(res) {
-							$location.path('/user');
+							console.log("Municipality Created HOORAY HOOOORAAAAAYYY	");
+							console.log(res.data);
+							user.municipalityId = res.data.id;
+							vm.errors = [];
+							console.log("AFTER MUNICIPALITY CREATED, USER: ");
+							console.log(user);
+							
+							var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+							
+							if(!user.firstName) {
+								vm.errors.push("You must have a first name");
+							}
+							
+							if(!user.lastName) {
+								vm.errors.push("You must have a last name");
+							}
+							
+							
+							if (!re.test(user.email)) {
+								vm.errors.push("Your email is not an email");
+							}
+							if (!user.password || user.password.length < 6) {
+								vm.errors.push("You must include a password, of at least 6 characters")
+							}
+							if (user.password !== user.confirm) {
+								vm.errors.push("Your passwords do not match");
+							}
+							
+							if (vm.errors.length > 0) {
+								return;
+							}
+							
+							delete user.confirm;
+							
+							authService.register(user)
+							.then(function(res) {
+								$location.path('/user');
+								console.log("CREATED USER: vvvvvvv");
+								console.log(res.data);
+							})
+							.catch(console.error)
 						})
-						.catch(console.error)
+						.catch(function(err) {
+							console.log(err);
+						})
 				}
+				
+				
+					
 				
 				vm.cancelButtonPressed = function() {
 					vm.errors = null;

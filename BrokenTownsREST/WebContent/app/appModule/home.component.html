@@ -1,7 +1,6 @@
-
 <!-- Modal -->
-<div class="row" ng-hide="vm.checkLogin()">	
-	<div class="modal show">
+<div class="row" ng-hide="vm.checkLogin()">    
+    <div class="modal show">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">      
@@ -13,13 +12,15 @@
               <!-- Login  -->   
       
       <form ng-show = "vm.showRegistrationForm" >
-			Email<input type="email" ng-model="user1.email" required /> 
-			Password<input type="password" ng-model="user1.password" required /> 
-			<input type="submit" value="Login" ng-click="vm.login(user1); u1ser = {}" />
-			<input type="submit" value="Cancel" ng-click="user1 = {}">
-			
-			<h1 ng-show="vm.errors.length > 0">{{vm.loginErrors[0]}}</h1>
-		</form>
+
+            Email<input type="email" ng-model="user1.email" required /> 
+            Password<input type="password" ng-model="user1.password" required /> 
+            <input type="submit" value="Login" ng-click="vm.login(user1); u1ser = {}" />
+            <input type="submit" value="Cancel" ng-click="user1 = {}">
+            
+            <h1 ng-show="vm.errors.length > 0">{{vm.loginErrors[0]}}</h1>
+        </form>
+
        
          <button type="btn" class="btn-success" ng-show = "vm.showRegistrationForm" ng-click="vm.showRegistrationForm = false;">Register</button>
          
@@ -61,5 +62,3 @@
 </div>
 </div>
 <!-- End of Modal  -->
-
-

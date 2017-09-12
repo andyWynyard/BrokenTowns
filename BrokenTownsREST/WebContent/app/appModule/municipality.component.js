@@ -20,6 +20,13 @@ angular.module('appModule')
 				state: "Practice State",
 				pic  : "http://www.monaco-denver.com/images/1700-960/denver-downtown-buildings-mountains-boutique-33b2fcd3.jpg"
 			}
+			
+			vm.markComplete = function(municipality) {
+				caseItemService.update(municipality.id)
+					.then(function(res) {
+						vm.municipality = res.data;
+					})
+			}
 		},
 		controllerAs : "vm"
 });

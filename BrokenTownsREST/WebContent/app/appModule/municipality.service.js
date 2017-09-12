@@ -11,6 +11,18 @@ angular.module('appModule')
 			})
 		}
 		
+		service.create = function(municipality) {
+			return $http({
+				method  : "POST",
+				url     : BASE_URL,
+				headers : {
+					  'Content-Type'  :  'application/json'
+				  },
+				data    : municipality
+				});
+			
+		}
+		
 		return service;
 	})
 	
