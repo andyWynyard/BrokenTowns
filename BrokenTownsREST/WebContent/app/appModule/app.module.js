@@ -1,4 +1,4 @@
-angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModule', 'ngMap' ]).config(
+angular.module('appModule', [ 'ngRoute', 'ui.bootstrap', 'ngCookies', 'authModule', 'ngMap', 'particlesApp' ]).config(
 		function($routeProvider) {
 			$routeProvider.when('/', {
 				template : '<home></home>'
