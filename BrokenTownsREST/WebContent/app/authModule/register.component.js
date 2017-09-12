@@ -43,10 +43,22 @@ angular.module('authModule')
 			delete user.confirm;
 			
 			authService.register(user)
+			vm.errors = [];
+			
+			authService.login(user)
 				.then(function(res) {
-					$location.path('/login');
+					if(res.data.municipality.id === null) {
+					$location.path('/user')
+					return true;
+					} else if(res.data.municipality.id !== null) {
+						$location.path('/municipality')
+						return true;
+					}
+		
 				})
-				.catch(console.error)
+				.catch();
+				vm.errors.push("Your email and/or password is incorrect. Please Try Again");
+				return vm.errors;
 		}
 		
 		
