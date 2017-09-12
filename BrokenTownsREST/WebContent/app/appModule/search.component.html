@@ -2,9 +2,12 @@
 	<div class="well" ng-hide="vm.selected || vm.selectedMunicipality">
 		<button type="btn" class="btn btn-success" ng-hide="vm.createNew" ng-click="vm.createNew = true; vm.setLocation(); vm.getLocation(); ">Create New Case</button>
 		<div ng-if="vm.createNew" ng-init="newCase = {};">
+		<h1>Create a new issue item here</h1>
 			<form enctype="multipart/form-data">
-				<input type="text" placeholder="Title" ng-model="newCase.title"><br>
-				<input type="text" placeholder="Description" ng-model="newCase.description"><br>
+				
+				<p><input type="text" class="form-control" placeholder="Name of Issue" ng-model="newCase.title"></p>
+				<!-- <p>Description of issue:<br><input type="text" placeholder="Description" ><br> -->
+				<textarea class="form-control" placeholder="Description"rows="4" ng-model="newCase.description"></textarea>
 				<input type="file" name="file" ng-file="vm.file">
 				<select ng-model="newCase.severity">
 					<option value="" selected disabled hidden>Set Severity</option>
@@ -18,7 +21,7 @@
 					<option value="" selected disabled hidden>Select Municipality</option>
 					<option ng-repeat="municipality in vm.municipalities" value="{{municipality.id}}">{{municipality.name}}</option>
 				</select><br>
-				{{newCase}}
+				<!-- {{newCase}} -->
 				<div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{vm.mapKey}}" class="well map">
 					<ng-map id="createMap" center="current-location" zoom="15" ng-click="vm.addMarker()" ng-model="newCase.latLong = vm.marker">
 				</ng-map>

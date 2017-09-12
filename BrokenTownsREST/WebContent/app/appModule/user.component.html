@@ -4,15 +4,15 @@
 		<h1>Welcome, {{vm.user.firstName}}!</h1>
 		<h2>Your Remaining Projects: <span class="label label-success">{{vm.getNumCaseItems()}}</span></h2>
 	</div>
-	<div class="container">
-	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" ng-click="vm.showMessages(vm.selected.id)"class="row well">
+	<div ng-show="vm.user.caseItems.size > 0" ng-hide = "vm.selected" ng-click="vm.showMessages(vm.selected.id)" class="container">
+	<div class="row">
 		<table class="table table-striped well">
 		  <thead>
 		  	<tr>
-		  	  <td>Project Name</td>
-		  	  <td>Severity</td>
-		  	  <td>description</td>
-		  	  <td>Completed?</td>
+		  	  <th>Project Name</th>
+		  	  <th>Severity</th>
+		  	  <th>Description</th>
+		  	  <th>Completed?</th>
 		  	</tr>
 		  </thead>
 		  
