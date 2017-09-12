@@ -28,6 +28,7 @@ public class MunicipalityController {
 	
 	@RequestMapping(path = "municipalities", method = RequestMethod.GET)
 	public Set<Municipality> index(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println("WEEEEEE INDEX!!!!");
 		return dao.index();
 	}
 	

@@ -37,7 +37,7 @@ angular.module('appModule')
 			vm.upload = function(imgData) {
 				console.log(vm.file)
 				uploadService.upload(imgData, vm.file)
-				.then((r)=>{
+				.then(function(r){
 					console.log(r);
 					return r;
 				});

@@ -54,9 +54,10 @@ angular.module('appModule').component(
 				
 				vm.login = function(user) {
 					vm.loginErrors = [];
-				
+					console.log(user);
 					authService.login(user)
 						.then(function(res) {
+							console.log(res.data);
 							if(res.data.municipality === null) {
 							$location.path('/user')
 							return true;
@@ -128,7 +129,7 @@ angular.module('appModule').component(
 							
 							authService.register(user)
 							.then(function(res) {
-								$location.path('/user');
+								$location.path('/municipality');
 								console.log("CREATED USER: vvvvvvv");
 								console.log(res.data);
 							})
@@ -137,6 +138,46 @@ angular.module('appModule').component(
 						.catch(function(err) {
 							console.log(err);
 						})
+				}
+				
+				vm.register = function(user) {
+					vm.errors = [];
+					console.log(user);
+					
+					var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+					
+					if(!user.firstName) {
+						vm.errors.push("You must have a first name");
+					}
+					
+					if(!user.lastName) {
+						vm.errors.push("You must have a last name");
+					}
+					
+					
+					if (!re.test(user.email)) {
+						vm.errors.push("Your email is not an email");
+					}
+					if (!user.password || user.password.length < 6) {
+						vm.errors.push("You must include a password, of at least 6 characters")
+					}
+					if (user.password !== user.confirm) {
+						vm.errors.push("Your passwords do not match");
+					}
+					
+					if (vm.errors.length > 0) {
+						return;
+					}
+					
+					delete user.confirm;
+					
+					authService.register(user)
+					.then(function(res) {
+						$location.path('/user');
+						console.log("CREATED USER: vvvvvvv");
+						console.log(res.data);
+					})
+					.catch(console.error)
 				}
 				
 				

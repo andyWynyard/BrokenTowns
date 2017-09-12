@@ -23,7 +23,7 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 
 	@Override
 	public Set<Municipality> index() {
-		String query = "SELECT m FROM Municipality m";
+		String query = "SELECT m FROM Municipality m JOIN FETCH m.users";
 		
 		List<Municipality> tempList = em.createQuery(query, Municipality.class).getResultList();
 		Set<Municipality> municipalities = new LinkedHashSet<>(tempList);

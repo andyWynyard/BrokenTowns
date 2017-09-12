@@ -11,6 +11,13 @@ angular.module('appModule')
 			})
 		}
 		
+		service.show = function(id) {
+			return $http({
+				method : "GET",
+				url    : BASE_URL + id
+			});
+		}
+		
 		service.create = function(municipality) {
 			return $http({
 				method  : "POST",

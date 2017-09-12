@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 //import entities.User;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -29,8 +29,7 @@ public class Municipality {
 	private String email;
 	
 	@OneToMany(mappedBy="municipality")
-//	@JsonManagedReference(value="userToMunicipality")
-	@JsonIgnore
+	@JsonManagedReference(value="userToMunicipality")
 	private List<User> users;
 	
 

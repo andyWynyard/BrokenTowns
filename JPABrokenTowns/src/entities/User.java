@@ -28,7 +28,7 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name="municipality_id")
-	
+	@JsonBackReference("userToMunicipality")
 	private Municipality municipality;
 
 	private String email;

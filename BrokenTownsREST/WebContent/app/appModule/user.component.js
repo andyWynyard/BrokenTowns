@@ -26,7 +26,7 @@ angular.module('appModule').component(
 						var temp = result.data;
 						temp.forEach(function(val) {
 							console.log(val);
-							console.log(val.user.id);
+//							console.log(val.user.id);
 							if (val.user.id == userId) {
 								vm.caseItems.push(val);
 							}
