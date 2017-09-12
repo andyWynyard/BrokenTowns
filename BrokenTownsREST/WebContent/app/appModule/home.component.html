@@ -9,19 +9,10 @@
         <h1 class="modal-title text-center">Broken Towns</h1>
          </div>
          <div class="modal-body">
-          <!-- Registration -->        
-          <form>
-			First Name<input type="text" ng-model="user.firstName" required /><br>
-			Last Name<input type="text" ng-model="user.lastName" required /><br>
-			Email<input type="text" ng-model="user.email" required /><br>
-			Password<input type="password" ng-model="user.password" required /><br>
-			Password Confirm<input type="password" ng-model="user.confirm" required /><br> <input type="submit" value="Register"ng-click="vm.register(user)" /> 
-			<input type="submit" value="Cancel"ng-click="user = {}; vm.cancelButtonPressed()">
-		</form>
-          
-      <!-- Login  -->   
+         
+              <!-- Login  -->   
       
-      <form>
+      <form ng-show = "vm.showRegistrationForm" >
 			Email<input type="email" ng-model="user1.email" required /> 
 			Password<input type="password" ng-model="user1.password" required /> 
 			<input type="submit" value="Login" ng-click="vm.login(user1); u1ser = {}" />
@@ -30,6 +21,38 @@
 			<h1 ng-show="vm.errors.length > 0">{{vm.loginErrors[0]}}</h1>
 		</form>
        
+         <button type="btn" class="btn-success" ng-show = "vm.showRegistrationForm" ng-click="vm.showRegistrationForm = false;">Register</button>
+         
+          <!-- Registration -->        
+       <uib-tabset active="activeJustified" justified="true">
+                  <uib-tab index="0" heading="Register as a User">
+                      <form ng-hide="vm.showRegistrationForm">
+                    First Name<input type="text" ng-model="user.firstName" required /><br>
+                    Last Name<input type="text" ng-model="user.lastName" required /><br>
+                    Email<input type="text" ng-model="user.email" required /><br>
+                    Password<input type="password" ng-model="user.password" required /><br>
+                    Password Confirm<input type="password" ng-model="user.confirm" required /><br> 
+                    <input type="submit" value="Register"ng-click="vm.register(user)" /> 
+                    <input type="submit" value="Cancel"ng-click="user = {}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed()">
+                </form>
+                  </uib-tab>
+          <uib-tab index="1" heading="Register as a Municipality">
+                  <form ng-hide="vm.showRegistrationForm">
+                      Municipality Name<input type="text" ng-model="municipality.name"><br>
+                      Municipality State<input type="text" ng-model="municipality.state"><br>
+                      Municipality email<input type="text" ng-model="municipality.email"><br>
+                First Name<input type="text" ng-model="user.firstName" required /><br>
+                Last Name<input type="text" ng-model="user.lastName" required /><br>
+                Email<input type="text" ng-model="user.email" required /><br>
+                Password<input type="password" ng-model="user.password" required /><br>
+                Password Confirm<input type="password" ng-model="user.confirm" required /><br> 
+                <input type="submit" value="Register"ng-click="vm.registerMunicAndCreateUser(municipality, user);" /> 
+                <input type="submit" value="Cancel"ng-click="user = {}; municipality ={}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed()">
+            </form>
+          </uib-tab>
+  </uib-tabset>
+          
+ 
       </div>
       <div class="modal-footer">
       </div>
