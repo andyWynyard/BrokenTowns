@@ -28,6 +28,7 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name="municipality_id")
+	@JsonIgnore
 	private Municipality municipality;
 
 	private String email;

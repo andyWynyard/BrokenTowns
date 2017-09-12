@@ -47,10 +47,10 @@ angular.module('authModule')
 			
 			authService.login(user)
 				.then(function(res) {
-					if(res.data.municipality.id === null) {
+					if(res.data.municipality === null) {
 					$location.path('/user')
 					return true;
-					} else if(res.data.municipality.id !== null) {
+					} else if(res.data.municipality !== null) {
 						$location.path('/municipality')
 						return true;
 					}
