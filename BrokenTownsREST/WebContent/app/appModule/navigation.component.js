@@ -21,6 +21,8 @@ angular.module('appModule').component('navigation', {
 				.catch(console.error)
 		}
 		
+		vm.userFirstName = authService.getToken().firstName;
+		
 		console.log("After checkLogin: " +vm.showLogin);
 
 	},
