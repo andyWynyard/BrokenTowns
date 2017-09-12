@@ -22,7 +22,7 @@
         </form>
 
        
-         <button type="btn" class="btn-success" ng-show = "vm.showRegistrationForm" ng-click="vm.showRegistrationForm = false;">Register</button>
+         <button type="btn" class="btn-success" ng-show = "vm.showRegistrationForm" ng-click="vm.showRegistrationForm = false; vm.checkLogin()">Register</button>
          
           <!-- Registration -->        
        <uib-tabset active="activeJustified" justified="true">
@@ -34,7 +34,7 @@
                     Password<input type="password" ng-model="user.password" required /><br>
                     Password Confirm<input type="password" ng-model="user.confirm" required /><br> 
                     <input type="submit" value="Register"ng-click="vm.register(user)" /> 
-                    <input type="submit" value="Cancel"ng-click="user = {}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed()">
+                    <input type="submit" value="Cancel"ng-click="user = {}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed(); vm.checkLogin())">
                 </form>
                   </uib-tab>
           <uib-tab index="1" heading="Register as a Municipality">
@@ -48,7 +48,7 @@
                 Password<input type="password" ng-model="user.password" required /><br>
                 Password Confirm<input type="password" ng-model="user.confirm" required /><br> 
                 <input type="submit" value="Register"ng-click="vm.registerMunicAndCreateUser(municipality, user);" /> 
-                <input type="submit" value="Cancel"ng-click="user = {}; municipality ={}; vm.changeRegistrationFormToTrue(); vm.cancelButtonPressed()">
+                <input type="submit" value="Cancel"ng-click="user = {}; municipality ={}; vm.changeRegistrationFormToTrue(); vm.checkLogin(); vm.cancelButtonPressed()">
             </form>
           </uib-tab>
   </uib-tabset>
