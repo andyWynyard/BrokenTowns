@@ -149,6 +149,15 @@ angular.module('appModule').component(
 						vm.showMessages(caseId);
 					})
 				}
+				
+				vm.checkLogin = function() {
+					if (authService.getToken().id) {
+						return true;
+						console.log("inside of check login: "  + vm.showLogin);
+					}
+					return false;
+				}
+				
 
 			},
 

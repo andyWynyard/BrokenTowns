@@ -7,6 +7,7 @@ angular.module('appModule').component('navigation', {
 		
 		vm.checkLogin = function() {
 			if (authService.getToken().id) {
+				vm.userFirstName = authService.getToken().firstName;
 				return true;
 				console.log("inside of check login: "  + vm.showLogin);
 			}
@@ -21,9 +22,18 @@ angular.module('appModule').component('navigation', {
 				.catch(console.error)
 		}
 		
-		vm.userFirstName = authService.getToken().firstName;
 		
 		console.log("After checkLogin: " +vm.showLogin);
+//		
+//		$interval(function() {
+//			vm.checkLogin();
+//		},
+//
+////The below sets the timeout, the first number is the interval, the second
+////number is how many times it fires
+//		1, 1
+//
+//		);
 
 	},
 
