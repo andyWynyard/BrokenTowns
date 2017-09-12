@@ -3,53 +3,33 @@ package entities;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name="user")
-public class User {
+public class UserDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(name="admin")
 	private boolean admin;
 
-	@ManyToOne
-	@JoinColumn(name="municipality_id")
-	private Municipality municipality;
+	private int municipalityId;
 
 	private String email;
 
-	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "last_name")
 	private String lastName;
 
 	private String password;
 
-	@OneToMany(mappedBy="user")
-	@JsonIgnore
 	private List<CaseItem> caseItems;
 
-	@OneToMany(mappedBy = "user")
-	@JsonIgnore
 	private List<Photo> photos;
 
-	@OneToMany(mappedBy = "user")
-	@JsonIgnore
 	private List<MessagePost> messages;
 
 	//GETS AND SETS
@@ -69,12 +49,12 @@ public class User {
 		this.admin = admin;
 	}
 
-	public Municipality getMunicipality() {
-		return municipality;
+	public int getMunicipalityId() {
+		return municipalityId;
 	}
 
-	public void setMunicipality(Municipality municipality) {
-		this.municipality = municipality;
+	public void setMunicipalityId(int municipalityId) {
+		this.municipalityId = municipalityId;
 	}
 
 	public void setPhotos(List<Photo> photos) {
@@ -121,10 +101,6 @@ public class User {
 		return caseItems;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public List<MessagePost> getMessages() {
 		return messages;
 	}
@@ -135,7 +111,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", admin=" + admin + ", municipality=" + municipality + ", email=" + email + "]";
+		return "User admin=" + admin + ", municipality=" + municipalityId + ", email=" + email
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", caseItems="
+				+ caseItems + ", photos=" + photos + ", messages=" + messages + "]";
 	}
 
 }

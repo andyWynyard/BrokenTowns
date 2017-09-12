@@ -8,7 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import entities.Municipality;
 import entities.User;
+import entities.UserDTO;
 
 @Transactional
 @Repository
@@ -21,11 +25,29 @@ public class AuthDAOImpl implements AuthDAO {
 	private PasswordEncoder encoder;
 
 	@Override
-	public User register(User u) {
-		u.setPassword(encoder.encode(u.getPassword()));
-		em.persist(u);
+	public User register(String jsonUser) {
+		ObjectMapper om = new ObjectMapper();
+		UserDTO dto = null;
+		User user = new User();
+		try {
+			dto = om.readValue(jsonUser, UserDTO.class);
+			user.setAdmin(dto.isAdmin());
+			user.setCaseItems(dto.getCaseItems());
+			user.setEmail(dto.getEmail());
+			user.setFirstName(dto.getFirstName());
+			user.setLastName(dto.getLastName());
+			user.setMessages(dto.getMessages());
+			user.setMunicipality(em.find(Municipality.class, dto.getMunicipalityId()));
+			user.setPassword(dto.getPassword());
+			user.setPhotos(dto.getPhotos());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		user.setPassword(encoder.encode(user.getPassword()));
+		em.persist(user);
 		em.flush();
-		return u;
+		return user;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="well">
 		<h1>Welcome, {{vm.municipality.name}}</h1>
-		<img src="{{vm.municipality.pic}}"/>
 		
 		<h2>Remaining Projects: <span class="label label-success">{{vm.caseItems.size}}</span></h2>
 	</div>
@@ -21,7 +20,7 @@
 		  		<td>{{caseItem.title}}</td>
 		  		<td>{{caseItem.severity}}</td>
 		  		<td>{{caseItem.description}}</td>
-		  		<td>{{caseItem.done}}</td>
+		  		<td><input type="checkbox" value="{{vm.municipality.completed}}" ng-click="vm.markComplete(vm.municipality)"></td>
 		  	</tr>
 		  </tbody>
 		
