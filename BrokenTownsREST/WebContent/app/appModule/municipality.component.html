@@ -2,7 +2,6 @@
 <div class="container">
 	<div class="well">
 		<h1>Welcome, {{vm.municipality.name}}</h1>
-		<h1>MUNICIPALITY</h1>
 		<h2>Remaining Projects: <span class="label label-success">{{vm.municipality.caseItems.length}}</span></h2>
 	</div>
 	<div ng-show="vm.municipality.caseItems.length > 0" ng-hide = "vm.selected" class="well">
