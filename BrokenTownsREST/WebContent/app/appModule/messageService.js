@@ -2,7 +2,7 @@ angular.module('appModule')
 	.factory('messageService', function($http, $filter, authService, $location, $rootScope) {
 		var service = {};
 		
-		var BASE_URL = "http://localhost:8080/BrokenTownsREST/api/caseItems/";
+		var BASE_URL = "api/caseItems/";
 		
 		var checkLogin = function() {
 			if (authService.getToken().id) {

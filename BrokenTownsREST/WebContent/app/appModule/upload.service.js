@@ -7,7 +7,7 @@ angular.module('appModule')
 		fd.append('file', file);
 		s3Image.userId = authService.getToken().id;
 		fd.append('data', JSON.stringify(s3Image));
-		 return $http.post("http://localhost:8080/BrokenTownsREST/api/upload", fd, {
+		 return $http.post("api/upload", fd, {
 				transformRequest : angular.identity,
 				headers: {
 	            	'Content-Type': undefined
