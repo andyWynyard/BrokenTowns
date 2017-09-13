@@ -57,6 +57,10 @@ public class AuthDAOImpl implements AuthDAO {
 		
 		User managedUser = em.createQuery(query, User.class).setParameter("email", u.getEmail()).getResultList().get(0);
 		 if(encoder.matches(u.getPassword(), managedUser.getPassword())) {
+			 if (managedUser.getMunicipality() != null) {
+				 managedUser.setMunicipalityId(managedUser.getMunicipality().getId());
+			 }
+			 System.out.println("Managed User: " + managedUser);
 			 return managedUser;
 		 }
 		

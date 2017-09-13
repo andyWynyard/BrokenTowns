@@ -58,11 +58,13 @@ angular.module('appModule').component(
 					authService.login(user)
 						.then(function(res) {
 							console.log(res.data);
-							if(res.data.municipality === null) {
-							$location.path('/user')
+							if(!res.data.municipalityId) {
+							$location.path('/user');
+							console.log("You are not a municipality");
 							return true;
-							} else if(res.data.municipality !== null) {
-								$location.path('/municipality')
+							} else if(res.data.municipalityId) {
+								$location.path('/municipality');
+								console.log("You are a municipality");
 								return true;
 							}
 				

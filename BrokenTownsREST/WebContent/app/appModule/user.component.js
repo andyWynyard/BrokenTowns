@@ -1,6 +1,5 @@
-angular.module('appModule').component(
-		'user',
-		{
+angular.module('appModule')
+	.component('user',{
 			templateUrl : 'app/appModule/user.component.html',
 			controller : function($location, authService, caseItemService,
 					userService, messageService, $scope, NgMap, municipalityService) {
@@ -13,7 +12,7 @@ angular.module('appModule').component(
 				var setUser = function() {
 					userService.show(userId).then(function(res) {
 						vm.user = res.data;
-						console.log("USER NAME = " + vm.user.firstName)
+						console.log("USER NAME = " + vm.user.firstName);
 					})
 				}
 				setUser();

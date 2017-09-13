@@ -1,6 +1,7 @@
 package data;
 
 import entities.User;
+import entities.UserDTO;
 
 public interface AuthDAO {
 	

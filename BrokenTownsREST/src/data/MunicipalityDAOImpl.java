@@ -32,7 +32,10 @@ public class MunicipalityDAOImpl implements MunicipalityDAO {
 
 	@Override
 	public Municipality show(int id) {
-		return em.find(Municipality.class, id);
+		System.out.println("MADE IT TO MUNICIPALITY DAO SHOW METHOD WITH ID: " + id);
+		Municipality m = em.find(Municipality.class, id);
+		System.out.println("RETURNED MUNICIPALITY: " + m);
+		return m;
 	}
 
 	@Override

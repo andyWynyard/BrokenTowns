@@ -7,6 +7,7 @@ angular.module('authModule')
     		$cookies.put('email', user.email)
     		$cookies.put('firstName', user.firstName)
     		$cookies.put('lastName', user.lastName)
+    		$cookies.put('municipalityId', user.municipalityId);
     }
 
     service.getToken = function() {
@@ -14,7 +15,8 @@ angular.module('authModule')
     			id : $cookies.get("uid"),
     			email : $cookies.get("email"),
     			firstName : $cookies.get("firstName"),
-    			lastName : $cookies.get("lastName")
+    			lastName : $cookies.get("lastName"),
+    			municipalityId : $cookies.get("municipalityId")
     			
     		}
     }
@@ -22,8 +24,9 @@ angular.module('authModule')
     var removeToken = function() {
     		$cookies.remove('uid');
 		$cookies.remove('email');
-		$cookies.remove('firstName')
-		$cookies.remove('lastName')
+		$cookies.remove('firstName');
+		$cookies.remove('lastName');
+		$cookies.remove('municipalityId');
     }
 
     service.login = function(user) {
@@ -36,6 +39,8 @@ angular.module('authModule')
     			data : user
     		})
     		.then(function(res) {
+    			console.log("HEY EVERYONE LOOK HERE NOW 955AM:");
+    			console.log(res.data);
     			saveToken(res.data);
     			$rootScope.$broadcast('loggedIn', {
     				user : res.data

@@ -56,6 +56,7 @@ public class AuthController {
 		}
 		session.setAttribute("user", loggedInUser);
 		System.out.println(loggedInUser);
+		
 		return loggedInUser;
 	}
 

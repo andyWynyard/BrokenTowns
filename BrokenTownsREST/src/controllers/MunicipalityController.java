@@ -34,6 +34,7 @@ public class MunicipalityController {
 	
 	@RequestMapping(path = "municipalities/{id}", method = RequestMethod.GET) 
 	public Municipality show(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		System.out.println("IN MUNICIPALITY SHOW ROUTE WITH ID: " + id);
 		return dao.show(id);
 	}
 	

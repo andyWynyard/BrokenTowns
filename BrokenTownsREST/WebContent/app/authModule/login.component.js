@@ -12,10 +12,12 @@ angular.module('authModule')
 			authService.login(user)
 				.then(function(res) {
 					if(res.data.municipality === null) {
-					$location.path('/user')
+					$location.path('/user');
+					
 					return true;
 					} else if(res.data.municipality !== null) {
-						$location.path('/municipality')
+						$location.path('/municipality');
+						
 						return true;
 					}
 		

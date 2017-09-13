@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,8 +29,12 @@ public class User {
 
 	@ManyToOne
 	@JoinColumn(name="municipality_id")
-	@JsonBackReference("userToMunicipality")
+	@JsonIgnore
+//	@JsonBackReference("userToMunicipality")
 	private Municipality municipality;
+	
+	@Transient
+	private int municipalityId;
 
 	private String email;
 
@@ -133,10 +138,20 @@ public class User {
 	public void setMessages(List<MessagePost> messages) {
 		this.messages = messages;
 	}
+	
+	
+
+	public int getMunicipalityId() {
+		return municipalityId;
+	}
+
+	public void setMunicipalityId(int municipalityId) {
+		this.municipalityId = municipalityId;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", admin=" + admin + ", municipality=" + municipality + ", email=" + email + "]";
+		return "User [id=" + id + ", admin=" + admin + ", municipality=" + municipality + ", municipalityId=" + municipalityId + ", email=" + email + "]";
 	}
 
 }
