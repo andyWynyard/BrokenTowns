@@ -3,6 +3,8 @@ angular.module('appModule').component('navigation', {
 	controller : function(authService, $location) {
 		var vm = this;
 		
+		vm.token = authService.getToken();
+		
 		console.log("before check login: " + vm.showLogin);
 		
 		vm.checkLogin = function() {

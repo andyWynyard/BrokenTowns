@@ -1,5 +1,5 @@
 angular.module('authModule')
-  .factory('authService', function($http, $cookies, $rootScope) {
+  .factory('authService', function($http, $cookies, $rootScope, municipalityService) {
     var service = {};
 
     var saveToken = function(user) {
@@ -8,6 +8,11 @@ angular.module('authModule')
     		$cookies.put('firstName', user.firstName)
     		$cookies.put('lastName', user.lastName)
     		$cookies.put('municipalityId', user.municipalityId);
+    		municipalityService.show(user.municipalityId)
+    			.then(function(res) {
+    				$cookies.put('municipalityName', res.data.name);
+    			})
+    			
     }
 
     service.getToken = function() {
@@ -16,7 +21,8 @@ angular.module('authModule')
     			email : $cookies.get("email"),
     			firstName : $cookies.get("firstName"),
     			lastName : $cookies.get("lastName"),
-    			municipalityId : $cookies.get("municipalityId")
+    			municipalityId : $cookies.get("municipalityId"),
+    			municipalityName : $cookies.get("municipalityName")
     			
     		}
     }
@@ -27,6 +33,7 @@ angular.module('authModule')
 		$cookies.remove('firstName');
 		$cookies.remove('lastName');
 		$cookies.remove('municipalityId');
+		$cookies.remove('municipalityName');
     }
 
     service.login = function(user) {
