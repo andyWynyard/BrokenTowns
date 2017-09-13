@@ -17,10 +17,10 @@
 		  </thead>
 		  
 		  <tbody>
-		  	<tr ng-repeat="caseItem in vm.municipality.caseItems" ng-click="vm.applySelected(caseItem)">
-		  		<td>{{caseItem.title}}</td>
-		  		<td>{{caseItem.severity}}</td>
-		  		<td>{{caseItem.description}}</td>
+		  	<tr ng-repeat="caseItem in vm.municipality.caseItems">
+		  		<td ng-click="vm.applySelected(caseItem)">{{caseItem.title}}</td>
+		  		<td ng-click="vm.applySelected(caseItem)">{{caseItem.severity}}</td>
+		  		<td ng-click="vm.applySelected(caseItem)">{{caseItem.description}}</td>
 		  		<td><input type="checkbox" ng-model="caseItem.done" ng-change="vm.markComplete(caseItem)" /></td>
 		  	</tr>
 		  </tbody>
