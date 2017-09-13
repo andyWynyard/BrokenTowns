@@ -40,6 +40,7 @@ public class AuthDAOImpl implements AuthDAO {
 			user.setMunicipality(em.find(Municipality.class, dto.getMunicipalityId()));
 			user.setPassword(dto.getPassword());
 			user.setPhotos(dto.getPhotos());
+			user.setMunicipalityId(dto.getMunicipalityId());
 			
 		} catch(Exception e) {
 			e.printStackTrace();
