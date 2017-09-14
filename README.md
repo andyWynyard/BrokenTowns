@@ -14,17 +14,22 @@ The users can additionally see whether or not the city has fixed it, via the
 message board.
 
 ## The Team
-Andrew Wynard
+### Andrew Wynard
 
 Andrew set up the Relational Database Service on Amazon Web Service, set up the
 S3 bucket for photos on Amazon, and prettied up the front end using CSS.
 
-Charlie Actor
+### Charlie Actor
 
 Charlie set up the Google API for the interactive map, and coordinated AngularJS
 on many of the users pages.
 
-Bryan Roberson
+### Bryan Roberson
 
 Set up the Java entities, did JUNIT testing, wrote the initial Object Relational
 Mapping, and wrote the Login/Authorization.  
+
+### Overall...
+
+We all had a hand in writing the REST API and incorporating front end
+technologies(CSS, HTML, Bootstrap, AngularJS). 
